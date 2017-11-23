@@ -3,143 +3,261 @@ import {Route, withRouter} from 'react-router-dom';
 import kayak from '../images/KAYAK.png';
 import accountIcon from '../images/AccountIcon.png';
 import Background from '../images/background.jpg';
-import hotelIcon from '../images/HotelIcon2.png';
+import hotelIcon from '../images/HtIcon.png';
+import flightIcon from '../images/FIcon.png';
+import carsIcon from '../images/Cars.png';
+import pIcon from '../images/Packages.png';
+import myAccount2 from '../images/MyAccount2.png';
 import MyAutosuggest from "./MyAutoSuggest";
 import DateTime from 'react-datetime';
+import AccountPreference from './AccountPreference';
+import Signup from './Signup';
+import Payment from './Payment';
+import AdminPage from './AdminPage';
 
 
 class HomePage extends Component {
 
+    sessionLogout = (event) => {
+        console.log("Inside session Logout")
+
+        // API.sessionLogout()
+        //     .then((status) => {
+        //         if (status === 204) {
+        //             console.log("status "+status)
+        //         } else if(status === 401){
+        //             //Error
+        //             console.log("Cannot Logout!")
+        //         }
+        //     });
+
+    };
+
     state = {
-        checkInDate : "",
-        checkOutDate : ""
+        checkInDate: "",
+        checkOutDate: "",
+        numOfRooms: 0
     }
 
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.handleCheckInDate= this.handleCheckInDate.bind(this)
+        this.handleCheckInDate = this.handleCheckInDate.bind(this)
 
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.state = {
-            checkInDate : "",
-            checkOutDate : ""
+            checkInDate: "",
+            checkOutDate: ""
         }
     }
 
-    componentWillMount(){
+    componentWillMount() {
         this.state = {
-            checkInDate : "",
-            checkOutDate : ""
+            checkInDate: "",
+            checkOutDate: ""
         }
     }
 
-    handleCheckInDate(value){
+    handleCheckInDate(value) {
         console.log(value._d);
         const cc = value._d;
         console.log(cc);
         this.setState({
-            checkInDate : cc
+            checkInDate: cc
         })
     }
 
 
     render() {
         return (
-            <div style={{backgroundImage: "url(" + Background + ")"}}>
-                <div className="navbar navbar-expand-md">
-                    <a className="navbar-brand" href="#"><img src={kayak} width={120}/></a>
-                    <button className="navbar-toggler" type="button" data-toggle="collapse"
-                            data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
-                            aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarCollapse">
-                        <ul className="navbar-nav mr-auto">
-                            <li className="nav-item active">
-                                <a className="nav-link" href="/hotels">Hotels <span className="sr-only">(current)</span></a>
-                            </li>
-                            <li className="nav-item active">
-                                <a className="nav-link" href="/Flights">Flights</a>
-                            </li>
-                            <li className="nav-item active">
-                                <a className="nav-link" href="/Cars">Cars</a>
-                            </li>
-                        </ul>
-                        <form className="form-inline mt-2 mt-md-0">
-                            <a className="nav-link" href="/myAccount"><img src={accountIcon} width={25}/>My Account</a>
-                        </form>
-                    </div>
-                </div>
-                <hr/>
-
-
-                <main role="main" className="container">
-
-                    <h3 style={{textAlign: "center", color: "white"}}><br/>Search of hundreds of travel sites at once
-                    </h3>
-                    <br/><br/>
+            <div className='container-fluid'>
+                <Route exact path="/" render={() => (<div style={{backgroundImage: "url(" + Background + ")"}}>
                     <div className="row">
-                        <div className="col-md-2">
+                        <div className="col-md-1">
 
                         </div>
-                        <div className="col-md-8">
-                            <form>
-                                <div className="row justify-content-center">
+                        <div className="col-md-10">
+                            <div className="navbar navbar-expand-md">
 
-                                    <button className="btn-group-vertical"><img src={hotelIcon} width={"100"}/></button>
-                                    <button className="btn-group-vertical">FLIGHTS</button>
-                                    <button className="btn-group-vertical">CARS</button>
-                                    <button className="btn-group-vertical">PACKAGES</button>
 
+                                <a className="navbar-brand" href="#"><img src={kayak} width={110}/></a>
+                                <div className="collapse navbar-collapse" id="navbarCollapse">
+                                    <ul className="navbar-nav mr-auto">
+                                        <li className="nav-item active">
+                                            <a className="nav-link" href="/hotels"
+                                               style={{color: "white", fontSize: 13}}>Hotels <span className="sr-only">(current)</span></a>
+                                        </li>
+                                        <li className="nav-item active">
+                                            <a className="nav-link" href="/Flights"
+                                               style={{color: "white", fontSize: 13}}>Flights</a>
+                                        </li>
+                                        <li className="nav-item active">
+                                            <a className="nav-link" href="/Cars" style={{color: "white", fontSize: 13}}>Cars</a>
+                                        </li>
+                                        <li className="nav-item active">
+                                            <a className="nav-link" href="/Packages"
+                                               style={{color: "white", fontSize: 13}}>Packages</a>
+                                        </li>
+                                    </ul>
+                                    <form className="form-inline mt-12 mt-md-0">
+
+                                        <div className="dropdown">
+                                            <a className="dropdown-toggle"
+                                                    id="menu1"
+                                                    data-toggle="dropdown" style={{color: "white", fontSize: 13}}>
+                                                <img src={myAccount2} width={30} style={{paddingBottom: 5}}/>My Account
+                                            </a>
+                                            <ul className="dropdown-menu"
+                                                role="menu"
+                                                aria-labelledby="menu1">
+                                                <li role="presentation">
+                                                    <a href="/SignIn" ><b>Sign In</b></a>
+                                                </li>
+                                                <li role="presentation" className="divider"/>
+                                                <li role="presentation">
+                                                    <a href="/AccountPreference" ><b>Account Preference</b></a>
+                                                </li>
+                                                <li role="presentation" className="divider"/>
+                                                <li role="presentation">
+                                                    <a href="#" ><b>Trips</b></a>
+                                                </li>
+                                                <li role="presentation" className="divider"/>
+                                                <li role="presentation">
+                                                    <a href="/" ><b>Sign Out</b></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </form>
                                 </div>
-                            </form>
+                            </div>
+                            <hr/>
                         </div>
-                        <div className="col-md-2">
+                        <div className="col-md-1">
 
                         </div>
+
                     </div>
-                    <div className="row">
-                    </div>
-                    <div className="jumbotron">
-                        <div className="row justify-content-center">
-                            <div className="col-md-12" style={{alignContent: "center"}}>
-                                <div className="row justify-content-center">
-                                    <div className="col-md-3">
-                                        <MyAutosuggest
-                                            id="type-c"
-                                            placeholder="Where"
-                                            onChange={this.onChange}
-                                        />
-                                    </div>
 
-                                    <div className="col-md-2">
-                                        <DateTime inputProps={{ placeholder: new Date().toISOString().split("T")[0], disabled: false }}
-                                        onChange = {this.handleCheckInDate} />
-                                    </div>
-                                    <div className="col-md-2">
-                                        <DateTime inputProps={{ placeholder: new Date().toISOString().split("T")[0], disabled: false }} />
-                                    </div>
 
-                                    <div className="col-md-3">
-                                        <MyAutosuggest
-                                            id="type-c"
-                                            placeholder="Type 'c'"
-                                            onChange={this.onChange}
-                                        />
-                                    </div>
+                    <main role="main" className="container">
 
-                                    <div className={"col-md-1"}>
-                                        <a className="btn btn-lg btn-primary" href="../../components/navbar/"
-                                           role="button">--&raquo;</a>
+                        <br/><h4 style={{textAlign: "center", color: "white"}}>Search of hundreds of travel sites at
+                        once.
+                    </h4>
+                        <br/><br/>
+                        <div className="row">
+                            <div className="col-md-2">
+
+                            </div>
+                            <div className="col-md-8">
+                                <form>
+                                    <div className="row justify-content-center">
+
+                                        <button className="btn-group-vertical"><img src={hotelIcon} width={"140"}/>
+                                        </button>
+                                        <button className="btn-group-vertical"><img src={flightIcon} width={"140"}/>
+                                        </button>
+                                        <button className="btn-group-vertical"><img src={carsIcon} width={"140"}/>
+                                        </button>
+                                        <button className="btn-group-vertical"><img src={pIcon} width={"140"}/></button>
+
                                     </div>
-                                </div>
+                                </form>
+                            </div>
+                            <div className="col-md-2">
 
                             </div>
                         </div>
-                    </div>
-                </main>
+                        <div className="row">
+                        </div>
+                        <div className="jumbotron">
+                            <div className="row justify-content-center">
+                                <div className="col-md-12" style={{alignContent: "center"}}>
+                                    <div className="row justify-content-center">
+                                        <div className="col-md-3">
+                                            <MyAutosuggest
+                                                id="location"
+                                                placeholder="Where"
+                                                onChange={this.onChange}
+                                            />
+                                        </div>
+
+                                        <div className="col-md-2">
+                                            <DateTime inputProps={{
+                                                placeholder: new Date().toISOString().split("T")[0],
+                                                disabled: false
+                                            }}
+                                                      onChange={this.handleCheckInDate}/>
+                                        </div>
+                                        <div className="col-md-2">
+                                            <DateTime inputProps={{
+                                                placeholder: new Date().toISOString().split("T")[0],
+                                                disabled: false
+                                            }}/>
+                                        </div>
+
+                                        <div className="col-md-3">
+                                            <div className="dropdown">
+                                                <button className="btn btn-default dropdown-toggle"
+                                                        type="button"
+                                                        id="menu1"
+                                                        data-toggle="dropdown">
+                                                    Tutorials
+                                                </button>
+                                                <ul className="dropdown-menu"
+                                                    role="menu"
+                                                    aria-labelledby="menu1">
+                                                    <li role="presentation">
+                                                            <b>Occupancy</b>
+                                                    </li>
+                                                    <li role="presentation">
+                                                            <br/>Rooms
+                                                        <button className="btn btn-default" >-</button>
+                                                        0
+                                                        <button className="btn btn-default" >+</button>
+                                                   </li>
+                                                    <li role="presentation" className="divider"/>
+                                                    <li role="presentation"><a role="menuitem" tabIndex="-1" href="#">Adults
+                                                        <button className="btn btn-default">-</button>
+                                                        0
+                                                        <button className="btn btn-default">+</button>
+                                                    </a></li>
+                                                    <li role="presentation" className="divider"/>
+                                                    <li role="presentation"><a role="menuitem" tabIndex="-1" href="#">Children
+                                                        <button className="btn btn-default">-</button>
+                                                        0
+                                                        <button className="btn btn-default">+</button>
+                                                    </a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div className={"col-md-1"}>
+                                            <a className="btn btn-lg btn-primary" href="../../components/navbar/"
+                                               role="button">--&raquo;</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+                )}/>
+                <Route exact path="/AccountPreference" render={() => (
+                    <AccountPreference />
+                )}/>
+                <Route exact path="/Signup" render={() => (
+                    <Signup/>
+                )}/>
+                <Route exact path="/Payment" render={() => (
+                    <Payment/>
+                )}/>
+                <Route exact path="/AdminPage" render={() => (
+                    <AdminPage/>
+                )}/>
+
             </div>
         )
     }
