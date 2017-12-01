@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
 import {Route, withRouter} from 'react-router-dom';
 import kayak from '../images/KAYAK.png';
+import AddHotelComponent from './AddHotelComponent';
 
 class AdminPage extends Component {
     render(){
         return(
+            <div>
+                <Route exact path="/AdminPage" render={() => (
             <div className='row'>
                 <div className='col-md-12'>
 
@@ -32,7 +35,7 @@ class AdminPage extends Component {
                                 <li data-toggle="collapse" data-target="#service3" className="collapsed">Add<span className="arrow"/>
                                 </li>
                                 <ul className="sub-menu collapse" id="service3">
-                                    <li style={{paddingLeft:20}}>Hotel</li>
+                                    <li style={{paddingLeft:20}}><a href="/addHotels">Hotel</a></li>
                                     <li style={{paddingLeft:20}}>Flight</li>
                                     <li style={{paddingLeft:20}}>Car</li>
                                 </ul>
@@ -58,6 +61,11 @@ class AdminPage extends Component {
                         </ul>
                     </div>
                 </div>
+            </div>
+                )}/>
+                <Route exact path="/addHotels" render={() => (
+                    <AddHotelComponent/>
+                )}/>
             </div>
         )
     }
