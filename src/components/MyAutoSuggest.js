@@ -1,64 +1,9 @@
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
+import * as API from "../api/API";
 
-const languages = [
-    {
-        name: 'C',
-        year: 1972
-    },
-    {
-        name: 'C#',
-        year: 2000
-    },
-    {
-        name: 'C++',
-        year: 1983
-    },
-    {
-        name: 'Clojure',
-        year: 2007
-    },
-    {
-        name: 'Elm',
-        year: 2012
-    },
-    {
-        name: 'Go',
-        year: 2009
-    },
-    {
-        name: 'Haskell',
-        year: 1990
-    },
-    {
-        name: 'Java',
-        year: 1995
-    },
-    {
-        name: 'Javascript',
-        year: 1995
-    },
-    {
-        name: 'Perl',
-        year: 1987
-    },
-    {
-        name: 'PHP',
-        year: 1995
-    },
-    {
-        name: 'Python',
-        year: 1991
-    },
-    {
-        name: 'Ruby',
-        year: 1995
-    },
-    {
-        name: 'Scala',
-        year: 2003
-    }
-];
+
+var city = [];
 
 
 // https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions#Using_Special_Characters
@@ -75,16 +20,25 @@ function getSuggestions(value) {
 
     const regex = new RegExp('^' + escapedValue, 'i');
 
-    return languages.filter(language => regex.test(language.name));
+    API.getCities()
+        .then((res) => {
+            if (res) {
+                city = res.data;
+            } else if (res) {
+                console.log("city not initialized");
+            }
+        })
+
+    return city.filter(city => regex.test(city.city_name));
 }
 
 function getSuggestionValue(suggestion) {
-    return suggestion.name;
+    return suggestion.city_name;
 }
 
 function renderSuggestion(suggestion) {
     return (
-        <span>{suggestion.name}</span>
+        <span>{suggestion.city_name}</span>
     );
 }
 
@@ -96,9 +50,12 @@ class MyAutosuggest extends React.Component {
 
         this.state = {
             value: '',
-            suggestions: []
+            suggestions: [],
+            city: []
         };
     }
+    
+
 
     onChange = (_, { newValue }) => {
         const { id, onChange } = this.props;
@@ -109,6 +66,7 @@ class MyAutosuggest extends React.Component {
 
         //onChange(id, newValue);
     };
+
 
     onSuggestionsFetchRequested = ({ value }) => {
         this.setState({
@@ -123,13 +81,19 @@ class MyAutosuggest extends React.Component {
     };
 
     render() {
-        const { id, placeholder } = this.props;
-        const { value, suggestions } = this.state;
+        const {id, placeholder} = this.props;
+        const {value, suggestions} = this.state;
         const inputProps = {
             placeholder,
             value,
             onChange: this.onChange
         };
+
+        {
+            this.state.city.map((task, i) =>
+                console.log(task.city_name)
+            )
+        }
 
         return (
             <Autosuggest
