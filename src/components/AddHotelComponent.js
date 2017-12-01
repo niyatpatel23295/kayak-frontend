@@ -13,7 +13,7 @@ class AddHotelComponent extends Component {
         hotel_stars: '',
         hotel_ratings: '',
         description: '',
-        city: '',
+        city: [],
         hotel_image: '',
         standardNo: '',
         deluxNo: '',
@@ -21,7 +21,8 @@ class AddHotelComponent extends Component {
         hotel_phoneNo: '',
         hotel_email: '',
         hotel_area: '',
-        hotel_street: ''
+        hotel_street: '',
+        selected_city: ''
     }
 
     constructor(props) {
@@ -29,14 +30,29 @@ class AddHotelComponent extends Component {
         this.makeAddress = this.makeAddress.bind(this);
     }
 
+    componentDidMount() {
+        API.getCities()
+            .then((res) => {
+                if (res) {
+                    this.setState({
+                        city: res.data
+                    });
+                } else if (res) {
+                     console.log(res);
+                }
+            })
+    }
+
+
+
     makeAddress() {
         this.setState({
             hotel_address: this.state.hotel_area + " " + this.state.hotel_street + " " + this.state.city
         })
     }
 
-    handleAddHotel = (userdata) => {
-        API.addHotels(userdata)
+    handleAddHotel = () => {
+        API.addHotels(this.state)
             .then((status) => {
                 if (status === 201) {
                     this.setState({
@@ -304,6 +320,27 @@ class AddHotelComponent extends Component {
                                                    }}/>
                                         </div>
                                     </div>
+
+
+                                    <div className="dropdown">
+                                        <button className="dropbtn">Dropdown</button>
+                                        <div className="dropdown-content">
+                                            {this.state.city.map((task, i) =>
+                                                <div className="RecentItem" key={i}>
+                                                    <a href="#" value ={task.city_name} onClick = {(event) => {
+                                                        this.setState({
+                                                            selected_city: task.city_name
+                                                        });
+                                                    }}>{task.city_name}</a>
+                                                </div>
+                                            )}
+                                            {console.log("this.state.selected_city"+this.state.selected_city)}
+                                            </div>
+                                    </div>
+
+
+
+
 
                                     <div className="form-group">
                                         <label className="col-md-4 control-label"/>
