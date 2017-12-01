@@ -9118,6 +9118,22 @@ a.btn.btn-lg.btn-primary.hotelSearchImage {
     border-left: 10px solid transparent;
 }
 
+.flightSubmitButton
+{
+    height: 64px;
+    width: 64px;
+    text-align: center;
+    font-size: 30px;
+    background-color: #ff690f;
+    border: 1px solid #ff690f;
+    margin-right: -140px;
+}
+
+
+.flightSubmitButton:active, .flightSubmitButton:hover{
+    background-color: #ff690f;
+    border-color: #ff690f;
+}
 
 .flight input {
     height: 65px;
