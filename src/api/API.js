@@ -91,3 +91,21 @@ return res.status;
    console.log("This is error");
 return error;
 });
+
+
+export const getCities = () =>
+    fetch(`${api}/getCities`, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include'
+    }).then(res => {
+        console.log(res);
+        return res.json();
+    })
+        .catch(error => {
+            console.log("This is error"+error);
+            return error;
+        });
