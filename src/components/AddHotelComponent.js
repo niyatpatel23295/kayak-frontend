@@ -3,6 +3,7 @@ import {Route, withRouter} from 'react-router-dom';
 import Rater from 'react-rater'
 import 'react-rater/lib/react-rater.css'
 import kayak from '../images/KAYAK.png';
+import * as API from '../api/API';
 
 class AddHotelComponent extends Component {
     state = {
@@ -192,10 +193,10 @@ class AddHotelComponent extends Component {
                                         </div>
                                         <div className="col-md-2 col-xs-4">
                                             <input id="Address" name="Address" type="text" placeholder="ZipCode"
-                                                   value={this.state.hotel_image}
+                                                   value={this.state.zip_code}
                                                    onChange={(event) => {
                                                        this.setState({
-                                                           hotel_image: event.target.value
+                                                           zip_code: event.target.value
                                                        });
                                                    }} className="form-control input-md "/>
                                         </div>
@@ -307,7 +308,7 @@ class AddHotelComponent extends Component {
                                     <div className="form-group">
                                         <label className="col-md-4 control-label"/>
                                         <div className="col-md-4">
-                                            <a href="#" className="btn btn-success" onclick={this.handleAddHotel}><span
+                                            <a href="#" className="btn btn-success" onClick={this.handleAddHotel}><span
                                                 className="glyphicon glyphicon-thumbs-up"/> Submit</a>
                                             <a href="#" className="btn btn-danger" value=""><span
                                                 className="glyphicon glyphicon-remove-sign"/> Clear</a>
