@@ -8944,3 +8944,169 @@ body {
 
 
 /*# sourceMappingURL=bootstrap.min.css.map */
+
+
+
+/*For tabs*/
+
+nav ul {
+    margin: 20px 0 0 0;
+    padding: 0;
+}
+nav li {
+    display: inline-block;
+    margin-right: 5px;
+}
+nav li a {
+    color: black;
+    background: white;
+    font-size: 15px;
+    padding: 10px 3.6em;
+    font-family: "HelveticaNeue-Bold",Helvetica,Arial,sans-serif;
+    font-weight: 600;
+    letter-spacing: .03em;
+}
+nav li a:hover {
+    color: #ff690f;
+    background: white;
+    text-decoration: none;
+}
+nav li.current a {
+    color: #ff690f;
+    background: white;
+    font-size: 15px;
+    padding: 10px 3.6em;
+    font-family: "HelveticaNeue-Bold",Helvetica,Arial,sans-serif;
+    font-weight: 600;
+    letter-spacing: .03em;
+}
+
+.content {
+    display: inline-block;
+    padding: 68px 20px;
+    margin-top: 10px;
+    background: #e4e5ea;
+    width: 174%;
+    position: relative;
+    left: -270px;
+    height: 200px;
+}
+.content img {
+    max-width: 100%;
+}
+
+/*For tabs*/
+
+/*For nav tabs*/
+.NavTabSection nav li a{
+    color: white;
+    background: none;
+    font-size: 15px;
+    padding: 15px 20px;
+    font-family: "HelveticaNeue-Bold",Helvetica,Arial,sans-serif;
+    font-weight: 600;
+    letter-spacing: .03em;
+}
+
+
+.NavTabSection nav li a:hover {
+    color: white;
+    background: none;
+    text-decoration: none;
+}
+.NavTabSection nav li.current a {
+    color: white;
+    background: none;
+    font-size: 15px;
+    padding: 15px 20px;
+    font-family: "HelveticaNeue-Bold",Helvetica,Arial,sans-serif;
+    font-weight: 600;
+    letter-spacing: .03em;
+    text-decoration: underline;
+}
+
+span.NavTabSection {
+    position: absolute;
+    top: -216px;
+    width: 500px;
+    left: -80px;
+}
+
+.myAccount {
+    position: absolute;
+    width: 150px;
+    left: 857px;
+    top: -10px;
+}
+/*For nav tabs*/
+
+.FancyBackgroundImage
+{
+    background-image: url("D:/CMPE 273/CMPE273 Kayak/kayak-frontend/src/images/background.jpg");
+    height: 600px;
+}
+
+.kayaklogo{
+    background-image: url("D:/CMPE 273/CMPE273 Kayak/kayak-frontend/src/images/KAYAK.png");
+    background-repeat: no-repeat;
+    height: 55px;
+    width: 155px;
+    background-size: contain;
+    margin-top: 20px;
+}
+
+.Horizonatalline {
+    border-bottom: 1px solid lightgrey;
+    width: 100%;
+    display: block;
+    margin-top: -15px;
+}
+
+.hotel input {
+    height: 65px;
+    width: 175px;
+}
+
+input.react-autosuggest__input {
+    width: 310px;
+    font-size: 21px;
+    font-weight: 700;
+    color: black;
+    padding: 0 0px 0 10px;
+}
+
+.col-md-2.hotelFromDate input {
+    width: 240px;
+}
+
+.col-md-2.hotelToDate input {
+    width: 240px;
+    margin-left: 29px;
+}
+
+.col-md-3.hotelFiltersContainer input {
+    margin-left: 65px;
+    width: 250px;
+}
+
+a.btn.btn-lg.btn-primary.hotelSearchImage {
+    height: 64px;
+    width: 64px;
+    text-align: center;
+    font-size: 30px;
+    background-color: #ff690f;
+    border: 1px solid #ff690f;
+}
+
+.caret{
+    height: 16px;
+    width: 10px;
+    padding-top: 5px;
+    position: relative;
+    right: -280px;
+    top: -37px;
+    display: inline-block;
+    border-top: 10px dashed;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+}
