@@ -2941,7 +2941,9 @@ tbody.collapse.show {
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, .15);
-    border-radius: .25rem
+    border-radius: .25rem;
+    margin-left: 875px;		
+    margin-top: 16px;
 }
 
 .dropup .dropdown-menu {
@@ -5075,7 +5077,9 @@ button.close {
     padding: 15px;
     border-bottom: 1px solid #e9ecef;
     border-top-left-radius: .3rem;
-    border-top-right-radius: .3rem
+    border-top-right-radius: .3rem;
+    width: 430px;		
+    height: 60px
 }
 
 .modal-header .close {
