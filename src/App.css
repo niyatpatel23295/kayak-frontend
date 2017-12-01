@@ -9121,9 +9121,89 @@ a.btn.btn-lg.btn-primary.hotelSearchImage {
 
 .flight input {
     height: 65px;
-    width: 175px;
+    width: 215px;
 }
 
+input[aria-owns="react-autowhatever-flightFromLocation"] {
+    margin-left: -100px;
+}
+
+input[aria-owns="react-autowhatever-flightToLocation"] {
+    margin-left: -70px;
+}
+
+.col-md-2.flightFromDate input {
+    border: none;
+    width: 230px;
+    margin-left: -25px;
+}
+
+.col-md-2.flightToDate input {
+    width: 190px;
+    margin-left: -5px;
+    border: none;
+}
+
+.col-md-3.flightFiltersContainer input {
+    margin-left: 20px;
+    width: 290px;
+    border: none;
+}
+
+
+.car input {
+    height: 65px;
+    width: 215px;
+}
+
+input[aria-owns="react-autowhatever-carlocation"] {
+    margin-left: -200px;
+    width: 420px;
+}
+
+.col-md-2.carFromDate input {
+    border: none;
+    width: 270px;
+    margin-left: 0px;
+}
+
+.col-md-2.carToDate input {
+    width: 270px;
+    margin-left: 65px;
+    border: none;
+}
+
+.carSubmitButton
+{
+    height: 64px;
+    width: 64px;
+    text-align: center;
+    font-size: 30px;
+    background-color: #ff690f;
+    border: 1px solid #ff690f;
+    margin-right: -40px;
+}
+
+
+.carSubmitButton:active, .carSubmitButton:hover{
+    background-color: #ff690f;
+    border-color: #ff690f;
+}
+
+
+.hotel, .flight, .car {
+    width: 1200px;
+}
+
+
+.btn-primary:not([disabled]):not(.disabled).active, .btn-primary:not([disabled]):not(.disabled):active, .show > .btn-primary.dropdown-toggle{
+    background-color: #ff690f;
+    border-color: #ff690f;
+}
+
+a.btn.btn-lg.btn-primary.carSubmitButton {
+    margin-right: -346px;
+}
 .dropbtn {
     background-color: #4CAF50;
     color: white;
