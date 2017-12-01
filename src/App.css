@@ -9042,12 +9042,12 @@ span.NavTabSection {
 
 .FancyBackgroundImage
 {
-    background-image: url("D:/CMPE 273/CMPE273 Kayak/kayak-frontend/src/images/background.jpg");
+    background-image: url("./images/background.jpg");
     height: 600px;
 }
 
 .kayaklogo{
-    background-image: url("D:/CMPE 273/CMPE273 Kayak/kayak-frontend/src/images/KAYAK.png");
+    background-image: url("./images/KAYAK.png");
     background-repeat: no-repeat;
     height: 55px;
     width: 155px;
