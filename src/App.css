@@ -8986,7 +8986,7 @@ nav li.current a {
     padding: 68px 20px;
     margin-top: 10px;
     background: #e4e5ea;
-    width: 174%;
+    width: 170%;
     position: relative;
     left: -270px;
     height: 200px;
@@ -9068,25 +9068,31 @@ span.NavTabSection {
 }
 
 input.react-autosuggest__input {
-    width: 310px;
+    width: 320px;
     font-size: 21px;
     font-weight: 700;
     color: black;
     padding: 0 0px 0 10px;
+    border: none;
+    margin-left: -20px;
 }
 
 .col-md-2.hotelFromDate input {
-    width: 240px;
+    border: none;
+    width: 190px;
+    margin-left: 10px;
 }
 
 .col-md-2.hotelToDate input {
-    width: 240px;
-    margin-left: 29px;
+    width: 190px;
+    margin-left: -5px;
+    border: none;
 }
 
 .col-md-3.hotelFiltersContainer input {
-    margin-left: 65px;
-    width: 250px;
+    margin-left: -2px;
+    width: 320px;
+    border: none;
 }
 
 a.btn.btn-lg.btn-primary.hotelSearchImage {
@@ -9096,6 +9102,7 @@ a.btn.btn-lg.btn-primary.hotelSearchImage {
     font-size: 30px;
     background-color: #ff690f;
     border: 1px solid #ff690f;
+    margin-left: 30px;
 }
 
 .caret{
@@ -9103,10 +9110,16 @@ a.btn.btn-lg.btn-primary.hotelSearchImage {
     width: 10px;
     padding-top: 5px;
     position: relative;
-    right: -280px;
+    right: -265px;
     top: -37px;
     display: inline-block;
     border-top: 10px dashed;
     border-right: 10px solid transparent;
     border-left: 10px solid transparent;
+}
+
+
+.flight input {
+    height: 65px;
+    width: 175px;
 }
