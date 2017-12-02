@@ -1,25 +1,31 @@
 import React, {Component} from 'react';
+import Tab from './Tab';
 import PropTypes from 'prop-types';
 
-class Tabs extends Component {
+var Tabs = React.createClass({
+    handleClick: function(tab){
+        this.props.changeTab(tab);
+    },
 
-    static propTypes = {
-        message: PropTypes.string.isRequired
-    };
-
-    render() {
+    render: function(){
         return (
-            <div className="row justify-content-md-center">
-                <div className="col-md-3">
-                    {this.props.message && ( //Just a change here
-                        <div className="alert alert-warning" role="alert">
-                            {this.props.message}
-                        </div>
-                    )}
-                </div>
-            </div>
+            <nav>
+                <ul>
+                    {this.props.tabList.map(function(tab) {
+                        return (
+                            <Tab
+                                handleClick={this.handleClick.bind(this, tab)}
+                                key={tab.id}
+                                url={tab.url}
+                                name={tab.name}
+                                isCurrent={(this.props.currentTab === tab.id)}
+                            />
+                        );
+                    }.bind(this))}
+                </ul>
+            </nav>
         );
     }
-}
+});
 
 export default Tabs;
