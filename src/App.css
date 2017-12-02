@@ -2942,7 +2942,7 @@ tbody.collapse.show {
     background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, .15);
     border-radius: .25rem;
-    margin-left: 875px;		
+    margin-left: 875px;
     margin-top: 16px;
 }
 
@@ -5078,7 +5078,7 @@ button.close {
     border-bottom: 1px solid #e9ecef;
     border-top-left-radius: .3rem;
     border-top-right-radius: .3rem;
-    width: 430px;		
+    width: 430px;
     height: 60px
 }
 
@@ -9047,7 +9047,7 @@ span.NavTabSection {
 .FancyBackgroundImage
 {
     background-image: url("./images/background.jpg");
-    height: 600px;
+    height: 700px;
 }
 
 .kayaklogo{
@@ -9113,9 +9113,9 @@ a.btn.btn-lg.btn-primary.hotelSearchImage {
     height: 16px;
     width: 10px;
     padding-top: 5px;
-    position: relative;
-    right: -265px;
-    top: -37px;
+    position: absolute;
+    right: -10px;
+    top: 30px;
     display: inline-block;
     border-top: 10px dashed;
     border-right: 10px solid transparent;
@@ -9262,4 +9262,73 @@ a.btn.btn-lg.btn-primary.carSubmitButton {
 
 .dropdown:hover .dropbtn {
     background-color: #3e8e41;
+}
+
+span#HotelFilterbox {
+    height: 200px;
+    display: block;
+}
+
+.HotelFilterboxTitle {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.HotelFilterboxRoom {
+    padding: 10px 0;
+    border-bottom: 1px solid lightgrey;
+}
+
+.HotelFilterboxAdults {
+    padding: 10px 0;
+    border-bottom: 1px solid lightgrey;
+}
+
+.HotelFilterboxChildren {
+    padding: 10px 0;
+}
+
+
+.HotelFilterboxRoom span{
+    padding: 0px 10px;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.HotelFilterboxAdults span{
+    padding: 0px 10px;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.HotelFilterboxChildren span{
+    padding: 0px 10px;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+span.HotelFilterboxRoomTitle, span.HotelFilterboxAdultsTitle, span.HotelFilterboxChildrenTitle {
+    width: 130px;
+    display: inline-block;
+    font-weight: 100;
+
+}
+
+.col-md-3.hotelFiltersContainer input{
+    font-size: 20px;
+    font-weight: 700;
+    padding-left: 10px;
+}
+
+.hotelFromDate input{
+    font-size: 20px;
+    font-weight: 700;
+    padding-left: 10px;
+}
+
+.hotelToDate input{
+    font-size: 20px;
+    font-weight: 700;
+    padding-left: 10px;
 }
