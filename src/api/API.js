@@ -146,3 +146,39 @@ export const getCities = () =>
             console.log("This is error"+error);
             return error;
         });
+
+export const GetFlightDetails = (payload) =>
+    fetch(`${api}/flight/GetFlightDetails`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify(payload)
+    }).then(res => {
+        console.log(res);
+        return res.json();
+    })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+
+export const updateFlight = (payload) =>
+    fetch(`${api}/flight/updateFlight`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body: JSON.stringify(payload)
+    }).then(res => {
+        console.log(res);
+        return res.status;
+    })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
