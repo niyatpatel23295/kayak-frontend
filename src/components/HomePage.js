@@ -20,6 +20,10 @@ import Tabs from './Tabs';
 import NavTabs from './NavTabs';
 import Content from './Content';
 import * as API from '../api/API';
+import UpdateHotelComponent from './UpdateHotelComponent';
+import AddFlightComponent from './AddFlightComponent';
+
+
 
 
 var tabList = [
@@ -365,12 +369,18 @@ class HomePage extends Component {
                     <SignIn/>
                 )}/>
 
-               <Route exact path="/AdminPage/addHotels" render={() => (
+               <Route exact path="/addHotels" render={() => (
                    <AddHotelComponent/>
                )}/>
                <Route exact path="/searchItem" render={() => (
                    <SearchResultPage searchResult = {this.state.result}/>
                )}/>
+                 <Route exact path="/updateHotels" render={() => (
+                    <UpdateHotelComponent/>
+                )}/>
+                <Route exact path="/addFlights" render={() => (
+                    <AddFlightComponent/>
+                )}/>
                 
             </div>
         )
