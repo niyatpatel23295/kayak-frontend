@@ -40,6 +40,43 @@ export const doSignUp = (payload) =>
             return error;
         });
 
+
+export const addFlight = (payload) =>
+    fetch(`${api}/flight/addFlight`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify(payload)
+    }).then(res => {
+        console.log(res);
+        return res.status;
+    })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+
+export const GetHotelDetails = (payload) =>
+    fetch(`${api}/hotels/GetHotelDetails`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify(payload)
+    }).then(res => {
+        console.log(res);
+        return res.json();
+    })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+
 export const SubmitPaymentDetails = (payload) =>
     fetch(`${api}/SubmitPaymentDetails`, {
         method: 'POST',
