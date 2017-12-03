@@ -292,3 +292,22 @@ export const updateCars = (payload) =>
             console.log("This is error");
             return error;
         });
+
+export const updateFlight = (payload) =>
+    fetch(`${api}/updateFlight`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body: JSON.stringify(payload)
+    }).then(res => {
+        console.log(res);
+        return res.status;
+    })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+
