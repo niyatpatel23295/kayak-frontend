@@ -1,3 +1,4 @@
+//const api = process.env.REACT_APP_CONTACTS_API_URL || 'http://10.0.0.165:3001';
 const api = process.env.REACT_APP_CONTACTS_API_URL || 'http://localhost:3001';
 
 const headers = {
@@ -58,6 +59,7 @@ export const addFlight = (payload) =>
             console.log("This is error");
             return error;
         });
+
 
 export const addCars = (payload) =>
     fetch(`${api}/addCars`, {
@@ -183,6 +185,7 @@ export const GetFlightDetails = (payload) =>
             return error;
         });
 
+
 export const updateFlight = (payload) =>
     fetch(`${api}/flight/updateFlight`, {
         method: 'POST',
@@ -198,5 +201,57 @@ export const updateFlight = (payload) =>
     })
         .catch(error => {
             console.log("This is error");
+            return error;
+        });
+
+export const getAirports = () =>
+    fetch(`${api}/getAirports`, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include'
+    }).then(res => {
+        console.log(res);
+        return res.json();
+    })
+        .catch(error => {
+            console.log("This is error"+error);
+            return error;
+        });
+
+export const doHotelSearch = (payload) =>
+    fetch(`${api}/hotels/search_hotels`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body: JSON.stringify(payload)
+    }).then(res => {
+        console.log("hotels/search_hotels: "+res);
+        return res.json();
+    })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+
+export const getHotelSearchResults = () =>
+    fetch(`${api}/hotels/search_hotels`, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include'
+    }).then(res => {
+        console.log(res);
+        return res.json();
+    })
+        .catch(error => {
+            console.log("This is error"+error);
             return error;
         });
