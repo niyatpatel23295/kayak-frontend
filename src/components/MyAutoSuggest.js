@@ -4,6 +4,7 @@ import * as API from "../api/API";
 
 
 var city = [];
+var CurrentId;
 
 
 // https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions#Using_Special_Characters
@@ -13,32 +14,91 @@ function escapeRegexCharacters(str) {
 
 function getSuggestions(value) {
     const escapedValue = escapeRegexCharacters(value.trim());
-
+    var ListToBeReturned;
     if (escapedValue === '') {
         return [];
     }
 
     const regex = new RegExp('^' + escapedValue, 'i');
 
-    API.getCities()
-        .then((res) => {
-            if (res) {
-                city = res.data;
-            } else if (res) {
-                console.log("city not initialized");
-            }
-        })
+    if (CurrentId == "location")
+    {
+        API.getCities()
+            .then((res) => {
+                if (res) {
+                    city = res.data;
+                } else if (res) {
+                    console.log("city not initialized");
+                }
+            })
+        ListToBeReturned = city.filter(city => regex.test(city.city_name));
+    }
+    else if (CurrentId == "flightFromLocation")
+    {
+        API.getAirports()
+            .then((res) => {
+                if (res) {
+                    city = res.data;
+                    console.log(JSON.stringify(res.data));
+                } else if (res) {
+                    console.log("city not initialized");
+                }
+            });
 
-    return city.filter(city => regex.test(city.city_name));
+        ListToBeReturned = city.filter(city => regex.test(city.airport));
+    }
+    else if (CurrentId == "flightToLocation")
+    {
+        API.getAirports()
+            .then((res) => {
+                if (res) {
+                    city = res.data;
+                } else if (res) {
+                    console.log("city not initialized");
+                }
+            })
+        ListToBeReturned = city.filter(city => regex.test(city.airport));
+    }
+    else if (CurrentId == "carlocation")
+    {
+        API.getCities()
+            .then((res) => {
+                if (res) {
+                    city = res.data;
+                } else if (res) {
+                    console.log("city not initialized");
+                }
+            })
+        ListToBeReturned = city.filter(city => regex.test(city.city_name));
+    }
+
+
+    return ListToBeReturned;
 }
 
 function getSuggestionValue(suggestion) {
-    return suggestion.city_name;
+
+    var stringToReturn;
+    if(CurrentId == "flightFromLocation" || CurrentId == "flightToLocation")
+    {
+        stringToReturn = suggestion.airport;
+    }
+    else {
+        stringToReturn = suggestion.city_name;
+    }
+
+    return stringToReturn;
 }
 
 function renderSuggestion(suggestion) {
     return (
-        <span>{suggestion.city_name}</span>
+        <span>{
+            CurrentId == "flightFromLocation" || CurrentId == "flightToLocation" ? (
+                suggestion.airport
+            ):(
+                suggestion.city_name
+            )
+        }</span>
     );
 }
 
@@ -51,19 +111,19 @@ class MyAutosuggest extends React.Component {
         this.state = {
             value: '',
             suggestions: [],
-            city: []
+            city: [],
+            CurrentId:''
         };
     }
-    
-
 
     onChange = (_, { newValue }) => {
         const { id, onChange } = this.props;
 
         this.setState({
-            value: newValue
+            value: newValue,
+            CurrentId: id
         });
-
+        CurrentId = id;
         //onChange(id, newValue);
     };
 
@@ -90,9 +150,19 @@ class MyAutosuggest extends React.Component {
         };
 
         {
-            this.state.city.map((task, i) =>
-                console.log(task.city_name)
-            )
+            console.log("CurrentId: " + this.state.CurrentId);
+            if(CurrentId == "flightFromLocation" || CurrentId == "flightToLocation")
+            {
+                this.state.city.map((task, i) =>
+                    console.log(task.airport)
+                )
+            }
+            else {
+
+                this.state.city.map((task, i) =>
+                    console.log(task.city_name)
+                )
+            }
         }
 
         return (
