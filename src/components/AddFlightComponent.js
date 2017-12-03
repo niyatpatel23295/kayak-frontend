@@ -19,11 +19,11 @@ class AddFlightComponent extends Component {
     }
 
     handleAddFlight = () => {
+        console.log("Flight Name ",this.state.flight_name);
         API.addFlight(this.state)
             .then((status) => {
                 if (status === 201) {
                     this.setState({
-
                         message: "flight added..!!",
                     });
                 } else if (status === 401) {
