@@ -1,18 +1,16 @@
 import React, {Component} from 'react';
 import {Route, withRouter} from 'react-router-dom';
 import Modal from './Modal';
-
 import accountIcon from '../images/AccountIcon.png';
+
 import hotelIcon from '../images/HtIcon.png';
 import flightIcon from '../images/FIcon.png';
 import carsIcon from '../images/Cars.png';
 import pIcon from '../images/Packages.png';
 import myAccount2 from '../images/MyAccount2.png';
+import footer from '.././images/footer.png'
+import aboveFooter from '.././images/aboveFooter.png'
 
-import Tabs from './Tabs';
-import NavTabs from './NavTabs';
-import Content from './Content';
-import * as API from '../api/API';
 import AccountPreference from './AccountPreference';
 import Signup from './Signup';
 import Payment from './Payment';
@@ -20,31 +18,39 @@ import AdminPage from './AdminPage';
 import SignIn from './SignIn';
 import AddHotelComponent from './AddHotelComponent';
 import SearchResultPage from './SearchResultPage';
+import Tabs from './Tabs';
+import NavTabs from './NavTabs';
+import Content from './Content';
+import * as API from '../api/API';
 import UpdateHotelComponent from './UpdateHotelComponent';
 import AddFlightComponent from './AddFlightComponent';
 import AddCarComponent from './AddCarComponent';
 
+
 var tabList = [
-    {'id': 1, 'name': 'HOTELS', 'url': '/hotel'},
-    {'id': 2, 'name': 'FLIGHTS', 'url': '/flight'},
-    {'id': 3, 'name': 'CARS', 'url': '/car'},
-    {'id': 4, 'name': 'PACKAGES', 'url': ''}
+    { 'id': 1, 'name': 'HOTELS', 'url': '/hotel' },
+    { 'id': 2, 'name': 'FLIGHTS', 'url': '/flight' },
+    { 'id': 3, 'name': 'CARS', 'url': '/car' },
+    { 'id': 4, 'name': 'PACKAGES', 'url': '' }
 ];
+
+
 
 var MainTabsContainer = React.createClass({
     getInitialState: function () {
         return {
             tabList: tabList,
-            currentTab: 1
+            currentTab: 1,
+            result: this.props.result
         };
     },
 
-    changeTab: function (tab) {
-        this.setState({currentTab: tab.id});
+    changeTab: function(tab) {
+        this.setState({ currentTab: tab.id });
     },
 
-    render: function () {
-        return (
+    render: function(){
+        return(
             <div>
                 <NavTabs
                     currentTab={this.state.currentTab}
@@ -56,7 +62,7 @@ var MainTabsContainer = React.createClass({
                     tabList={this.state.tabList}
                     changeTab={this.changeTab}
                 />
-                <Content currentTab={this.state.currentTab}/>
+                <Content currentTab={this.state.currentTab} />
             </div>
         );
     }
@@ -78,6 +84,8 @@ class HomePage extends Component {
         //     });
     };
 
+
+
     state = {
         checkInDate: "",
         checkOutDate: "",
@@ -85,11 +93,12 @@ class HomePage extends Component {
         email: '',
         password: '',
         isModalOpen: false,
-        roomNo: 0,
+        roomNo : 0,
         adultsNo: 0,
-        childrenNo: 0,
+        childrenNo : 0,
         roomNumStr: "",
-        guestNumStr: ""
+        guestNumStr: "",
+        result:''
     }
 
     constructor(props) {
@@ -98,12 +107,21 @@ class HomePage extends Component {
         this.hotelToggle = this.hotelToggle.bind(this);
         this.flightToggle = this.flightToggle.bind(this);
         this.carToggle = this.carToggle.bind(this);
+        this.SearchResulthandler = this.SearchResulthandler.bind(this);
 
         this.state = {
             shownHotel: true,
             shownFlight: false,
-            shownCar: false
+            shownCar: false,
+            result: ''
         }
+    }
+
+    SearchResulthandler(param1) {
+        console.log(param1);
+        this.setState({
+            result: param1
+        });
     }
 
     hotelToggle() {
@@ -137,9 +155,9 @@ class HomePage extends Component {
             checkOutDate: "",
             isModalOpen: false,
             shownHotel: true,
-            roomNo: 0,
+            roomNo : 0,
             adultsNo: 0,
-            childrenNo: 0,
+            childrenNo : 0,
             roomNumStr: "",
             guestNumStr: ""
         }
@@ -151,9 +169,9 @@ class HomePage extends Component {
             checkOutDate: "",
             email: '',
             password: '',
-            roomNo: 0,
+            roomNo : 0,
             adultsNo: 0,
-            childrenNo: 0,
+            childrenNo : 0,
             roomNumStr: "",
             guestNumStr: "",
             isModalOpen: false
@@ -171,7 +189,7 @@ class HomePage extends Component {
 
 
     handleSubmit = (userdata) => {
-        console.log("Inside HandleSubmit ", userdata);
+        console.log("Inside HandleSubmit ",userdata);
         API.doLogin(userdata)
             .then((status) => {
                 if (status === 201) {
@@ -192,184 +210,168 @@ class HomePage extends Component {
     };
 
     openModal() {
-        this.setState({isModalOpen: true})
+        this.setState({ isModalOpen: true })
     }
 
     closeModal() {
-        this.setState({isModalOpen: false})
+        this.setState({ isModalOpen: false })
     }
 
-    render() {
+    render()
+        {
 
-        var shownHotel = {
-            display: this.state.shownHotel ? "block" : "none"
-        };
+            var shownHotel = {
+                display: this.state.shownHotel ? "block" : "none"
+            };
 
-        var shownFlight = {
-            display: this.state.shownFlight ? "block" : "none"
-        };
+            var shownFlight = {
+                display: this.state.shownFlight ? "block" : "none"
+            };
 
-        var shownCar = {
-            display: this.state.shownCar ? "block" : "none"
-        };
+            var shownCar = {
+                display: this.state.shownCar ? "block" : "none"
+            };
 
         return (
             <div className='container-fluid'>
-                <Route exact path="/" render={() => (<div className="FancyBackgroundImage">
-                        <div className="row">
-                            {/* <div>
+               <Route exact path="/" render={() => (<div className="FancyBackgroundImage">
+                    <div className="row">
+                        {/* <div>
                             <h2 style={ shown }>this.state.shown = true</h2>
                             <h2 style={ hidden }>this.state.shown = false</h2>
                             <button onClick={this.toggle.bind(this)}>Toggle</button>
                         </div>*/}
-                            <div>
-                                <Modal isOpen={this.state.isModalOpen} onClose={() => this.closeModal()}>
+                        <div>
+                            <Modal isOpen={this.state.isModalOpen} onClose={() => this.closeModal()}>
 
-                                    <div className="modal-header">
-                                        <h4 className="modal-title" id="myModalLabel">Login to kayak.com</h4>
-                                        <button type="button" className="close" data-dismiss="modal"
-                                                onClick={() => this.closeModal()}><span aria-hidden="true">×</span>
-                                            <span className="sr-only">Close</span></button>
-
-                                    </div>
-                                    <div className="modal-body">
-                                        <div className="row">
-                                            <div className="col-xs-12">
-                                                <div className="well">
-                                                    <form>
-                                                        <div className="form-group">
-                                                            <label className="control-label">Username</label>
-                                                            <input type="text" className="form-control" id="userID"
-                                                                   value={this.state.email}
-                                                                   onChange={(event) => {
-                                                                       this.setState({
-                                                                           email: event.target.value
-                                                                       });
-                                                                   }} required="" placeholder="Email Address"/>
-
-                                                        </div>
-                                                        <div className="form-group">
-                                                            <label className="control-label">Password</label>
-                                                            <input type="password" className="form-control"
-                                                                   id="password" name="password"
-                                                                   value={this.state.password}
-                                                                   onChange={(event) => {
-                                                                       this.setState({
-                                                                           password: event.target.value
-                                                                       });
-                                                                   }} required="" title="Please enter your password"/>
-
-                                                        </div>
-                                                        <div id="loginErrorMsg" className="alert alert-error hide">Wrong
-                                                            username og password
-                                                        </div>
-                                                        <div className="checkbox">
-                                                            <label>
-                                                                <input type="checkbox" name="remember" id="remember"/>
-                                                                Remember login
-                                                            </label>
-                                                            <p className="help-block">(if this is a private
-                                                                computer)</p>
-                                                        </div>
-                                                        <button type="submit" className="btn btn-success btn-block"
-                                                                onClick={() => this.handleSubmit(this.state)}>Login
-                                                        </button>
-                                                        <br/>
-                                                        Don't have an account! <a href="/Signup"> Sign Up Here</a>
-                                                    </form>
-                                                </div>
-                                            </div>
+                                        <div className="modal-header">
+                                            <h4 className="modal-title" id="myModalLabel">Login to kayak.com</h4>
+                                            <button type="button" className="close" data-dismiss="modal" onClick={() => this.closeModal()}><span aria-hidden="true">×</span>
+                                                <span className="sr-only">Close</span></button>
 
                                         </div>
-                                    </div>
+                                        <div className="modal-body">
+                                            <div className="row">
+                                                <div className="col-xs-12">
+                                                    <div className="well">
+                                                        <form>
+                                                            <div className="form-group">
+                                                                <label className="control-label">Username</label>
+                                                                <input type="text" className="form-control" id="userID" value={this.state.email}
+                                                                       onChange={(event) => {
+                                                                           this.setState({
+                                                                               email: event.target.value
+                                                                           });
+                                                                       }} required="" placeholder="Email Address"/>
 
-                                </Modal>
-                            </div>
+                                                            </div>
+                                                            <div className="form-group">
+                                                                <label className="control-label">Password</label>
+                                                                <input type="password" className="form-control" id="password" name="password" value={this.state.password}
+                                                                       onChange={(event) => {
+                                                                           this.setState({
+                                                                               password: event.target.value
+                                                                           });
+                                                                       }} required="" title="Please enter your password"/>
 
-                            <div className="col-md-1">
+                                                            </div>
+                                                            <div id="loginErrorMsg" className="alert alert-error hide">Wrong username og password</div>
+                                                            <div className="checkbox">
+                                                                <label>
+                                                                    <input type="checkbox" name="remember" id="remember"/> Remember login
+                                                                </label>
+                                                                <p className="help-block">(if this is a private computer)</p>
+                                                            </div>
+                                                            <button type="submit" className="btn btn-success btn-block" onClick={() => this.handleSubmit(this.state)}>Login</button>
 
-                            </div>
-                            <div className="col-md-10">
-                                <div className="navbar navbar-expand-md">
-                                    <a className="navbar-brand kayaklogo" href="#"></a>
+                                                        </form>
+                                                    </div>
+                                                </div>
 
-                                    <div>
-                                    </div>
-
-                                    <div className="collapse navbar-collapse" id="navbarCollapse">
-                                        <form className="form-inline mt-12 mt-md-0">
-
-                                            <div className="dropdown">
-                                                <a className="dropdown-toggle myAccount"
-                                                   id="menu1"
-                                                   data-toggle="dropdown" style={{color: "white", fontSize: 13}}>
-                                                    <img src={myAccount2} width={30} style={{paddingBottom: 5}}/>My
-                                                    Account
-                                                </a>
-                                                <ul className="dropdown-menu"
-                                                    role="menu"
-                                                    aria-labelledby="menu1">
-                                                    <li role="presentation">
-                                                        <a href="#" onClick={() => this.openModal()}><b>Sign In</b></a>
-                                                    </li>
-                                                    <li role="presentation" className="divider"/>
-                                                    <li role="presentation">
-                                                        <a href="/AccountPreference"><b>Account Preference</b></a>
-                                                    </li>
-                                                    <li role="presentation" className="divider"/>
-                                                    <li role="presentation">
-                                                        <a href="#"><b>Trips</b></a>
-                                                    </li>
-                                                    <li role="presentation" className="divider"/>
-                                                    <li role="presentation">
-                                                        <a href="/" onClick={this.sessionLogout()}><b>Sign Out</b></a>
-                                                    </li>
-                                                </ul>
                                             </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                <span className="Horizonatalline"></span>
-                            </div>
-                            <div className="col-md-1">
+                                        </div>
 
-                            </div>
+                            </Modal>
 
                         </div>
 
+                        <div className="col-md-1">
 
-                        <main role="main" className="container">
+                        </div>
+                        <div className="col-md-10">
+                            <div className="navbar navbar-expand-md">
+                                <a className="navbar-brand kayaklogo" href="#"></a>
 
-                            <br/><h2 style={{
-                            textAlign: "center",
-                            color: "white",
-                            fontWeight: "300",
-                            fontWeight: "700",
-                            fontSize: "24px",
-                            marginTop: "50px",
-                            marginBottom: "15px"
-                        }}>Search of hundreds of travel sites at
-
-                            once.
-                        </h2>
-                            <br/><br/>
-                            <div className="row">
-                                <div className="col-md-2">
-
+                                <div>
                                 </div>
-                                <div className="col-md-8">
-                                    <MainTabsContainer/>
+
+                                <div className="collapse navbar-collapse" id="navbarCollapse">
+                                    <form className="form-inline mt-12 mt-md-0">
+
+                                        <div className="dropdown">
+                                            <a className="dropdown-toggle myAccount"
+                                                    id="menu1"
+                                                    data-toggle="dropdown" style={{color: "white", fontSize: 13}}>
+                                                <img src={myAccount2} width={30} style={{paddingBottom: 5}}/>My Account
+                                            </a>
+                                            <ul className="dropdown-menu"
+                                                role="menu"
+                                                aria-labelledby="menu1">
+                                                <li role="presentation">
+                                                    <a href="#" onClick={() => this.openModal()}><b>Sign In</b></a>
+                                                </li>
+                                                <li role="presentation" className="divider"/>
+                                                <li role="presentation">
+                                                    <a href="/AccountPreference" ><b>Account Preference</b></a>
+                                                </li>
+                                                <li role="presentation" className="divider"/>
+                                                <li role="presentation">
+                                                    <a href="#" ><b>Trips</b></a>
+                                                </li>
+                                                <li role="presentation" className="divider"/>
+                                                <li role="presentation">
+                                                    <a href="/" onClick={this.sessionLogout()}><b>Sign Out</b></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
-                            <div className="row">
-                            </div>
+                            <span className="Horizonatalline"></span>
+                        </div>
+                        <div className="col-md-1">
 
-                        </main>
-
+                        </div>
                     </div>
+
+
+                    <main role="main" className="container">
+
+                        <br/><h2 style={{textAlign: "center", color: "white", fontWeight: "300", fontWeight: "700", fontSize: "24px", marginTop: "50px", marginBottom : "15px"}}>Search of hundreds of travel sites at
+
+                        once.
+                    </h2>
+                        <br/><br/>
+                        <div className="row">
+                            <div className="col-md-2">
+
+                            </div>
+                            <div className="col-md-8">
+                                <MainTabsContainer action={this.SearchResulthandler}/>
+                            </div>
+                        </div>
+                        <div className="row">
+                        </div>
+
+                    </main>
+                       <div className="aboveFooter">
+                           <h1>Use our smart tools to make your search for cheap hotels easier</h1>
+                           <img className="aboveFooterImage" src={aboveFooter} alt={'aboveFooter'}/>
+                       </div>
+                </div>
                 )}/>
                 <Route exact path="/AccountPreference" render={() => (
-                    <AccountPreference/>
+                    <AccountPreference />
                 )}/>
                 <Route exact path="/Signup" render={() => (
                     <Signup/>
@@ -399,7 +401,9 @@ class HomePage extends Component {
                 <Route exact path="/addCars" render={() => (
                     <AddCarComponent/>
                 )}/>
-
+                <div >
+                    <img className="footer" src={footer} alt={'footer'}/>
+                </div>
             </div>
         )
     }
