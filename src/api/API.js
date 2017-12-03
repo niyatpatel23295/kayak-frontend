@@ -42,7 +42,25 @@ export const doSignUp = (payload) =>
 
 
 export const addFlight = (payload) =>
-    fetch(`${api}/flight/addFlight`, {
+    fetch(`${api}/addFlight`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify(payload)
+    }).then(res => {
+        console.log(res);
+        return res.status;
+    })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+
+export const addCars = (payload) =>
+    fetch(`${api}/addCars`, {
         method: 'POST',
         headers: {
             ...headers,

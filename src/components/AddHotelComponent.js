@@ -27,7 +27,22 @@ class AddHotelComponent extends Component {
         selected_city: ''
     }
 
-   handleAddHotel = () => {
+    constructor(props){
+        super(props);
+        this.handleSearchHotels= this.handleSearchHotels.bind(this);
+    }
+
+    handleSearchHotels() {
+        console.log("SearchHotel: " + document.getElementsByClassName("react-autosuggest__input")[0].getAttribute("value"));
+        var valueOfCity = document.getElementsByClassName("react-autosuggest__input")[0].getAttribute("value");
+        this.setState({
+            city : valueOfCity
+        })
+    }
+
+    handleAddHotel = () => {
+        this.handleSearchHotels();
+        console.log("this.state.city "+this.state.city)
         API.addHotels(this.state)
             .then((status) => {
                 if (status === 201) {
