@@ -7,6 +7,7 @@ import * as API from '../api/API';
 
 class UpdateFlightComponent extends Component {
     state = {
+        fid:'',
         flight_name: '',
         to_airport: '',
         from_airport: '',
@@ -37,13 +38,31 @@ class UpdateFlightComponent extends Component {
     };
 
     handleGetFlightDetails = () => {
+        console.log("this.state.searchFlight_key ",this.state.searchFlight_key);
+        this.setState({
+            message:''
+        })
         API.GetFlightDetails(this.state)
             .then((res) => {
-                if (res) {
+                console.log(res.data[0]);
+                if (res.data) {
+                    console.log(res.data[0].hid);
                     this.setState({
-                        FlightDetails: res.data
+                        flight_name: res.data[0].flight_name,
+                        to_airport:res.data[0].to_airport,
+                        from_airport:res.data[0].from_airport,
+                        departure:res.data[0].departure,
+                        arrival:res.data[0].arrival,
+                        class:res.data[0].class,
+                        fair:res.data[0].fair,
+                        flight_number:res.data[0].flight_number,
+                        duration:res.data[0].duration,
+                        FlightDetails:res.data[0].FlightDetails
                     });
-                } else if (res) {
+                } else if (res.error_message) {
+                    this.setState({
+                        message : res.error_message
+                    })
                     console.log(res);
                 }
             })
@@ -121,7 +140,7 @@ class UpdateFlightComponent extends Component {
                                                     </i>
                                                 </div>
                                                 <input id="Hotel Name" name="hotelName" type="text"
-                                                       placeholder="Flight Name" value={this.state.searchFlight_key}
+                                                       placeholder="Flight ID" value={this.state.searchFlight_key}
                                                        onChange={(event) => {
                                                            this.setState({
                                                                searchFlight_key: event.target.value
@@ -140,7 +159,7 @@ class UpdateFlightComponent extends Component {
                                         <div className="col-md-4">
                                             <div className="input-group">
                                                 <input id="Flight Name" name="flightName" type="text"
-                                                       placeholder={this.state.FlightDetails.flight_name} value={this.state.flight_name}
+                                                       placeholder={this.state.flight_name} value={this.state.flight_name}
                                                        onChange={(event) => {
                                                            this.setState({
                                                                flight_name: event.target.value
@@ -153,7 +172,7 @@ class UpdateFlightComponent extends Component {
                                         <label className="col-md-4 control-label"> To airport </label>
                                         <div className="col-md-2  col-xs-4">
                                             <input type="text"
-                                                   placeholder={ this.state.FlightDetails.to_airport} value={this.state.to_airport}
+                                                   placeholder={ this.state.to_airport} value={this.state.to_airport}
                                                    onChange={(event) => {
                                                        this.setState({
                                                            to_airport: event.target.value
@@ -165,7 +184,7 @@ class UpdateFlightComponent extends Component {
                                         <label className="col-md-4 control-label"> From airport </label>
                                         <div className="col-md-2  col-xs-4">
                                             <input type="text"
-                                                   placeholder={this.state.FlightDetails.from_airport} value={this.state.from_airport}
+                                                   placeholder={this.state.from_airport} value={this.state.from_airport}
                                                    onChange={(event) => {
                                                        this.setState({
                                                            from_airport: event.target.value
@@ -179,7 +198,7 @@ class UpdateFlightComponent extends Component {
                                         <div className="col-md-4">
                                             <div className="input-group">
                                                 <input type="text"
-                                                       placeholder={this.state.FlightDetails.departure}
+                                                       placeholder={this.state.departure}
                                                        value={this.state.departure}
                                                        onChange={(event) => {
                                                            this.setState({
@@ -195,7 +214,7 @@ class UpdateFlightComponent extends Component {
                                         <div className="col-md-4">
                                             <div className="input-group">
                                                 <input type="text"
-                                                       placeholder={this.state.FlightDetails.arrival}
+                                                       placeholder={this.state.arrival}
                                                        value={this.state.arrival}
                                                        onChange={(event) => {
                                                            this.setState({
@@ -211,7 +230,7 @@ class UpdateFlightComponent extends Component {
                                         <div className="col-md-4">
                                             <div className="input-group">
                                                 <input type="text"
-                                                       placeholder={this.state.FlightDetails.class}
+                                                       placeholder={this.state.class}
                                                        value={this.state.class}
                                                        onChange={(event) => {
                                                            this.setState({
@@ -227,7 +246,7 @@ class UpdateFlightComponent extends Component {
                                         <div className="col-md-4">
                                             <div className="input-group">
                                                 <input type="text"
-                                                       placeholder={this.state.FlightDetails.fair}
+                                                       placeholder={this.state.fair}
                                                        value={this.state.fair}
                                                        onChange={(event) => {
                                                            this.setState({
@@ -243,7 +262,7 @@ class UpdateFlightComponent extends Component {
                                         <div className="col-md-4">
                                             <div className="input-group">
                                                 <input type="text"
-                                                       placeholder={this.state.FlightDetails.flight_number}
+                                                       placeholder={this.state.flight_number}
                                                        value={this.state.flight_number}
                                                        onChange={(event) => {
                                                            this.setState({
@@ -258,7 +277,7 @@ class UpdateFlightComponent extends Component {
                                         <div className="col-md-4">
                                             <div className="input-group">
                                                 <input type="text"
-                                                       placeholder={this.state.FlightDetails.duration}
+                                                       placeholder={this.state.duration}
                                                        value={this.state.duration}
                                                        onChange={(event) => {
                                                            this.setState({
