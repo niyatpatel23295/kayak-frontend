@@ -311,3 +311,41 @@ export const updateFlight = (payload) =>
             return error;
         });
 
+export const GetHotelDetails = (payload) =>
+    fetch(`${api}/hotels/get_hotel_details`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body: JSON.stringify(payload)
+    }).then(res => {
+        console.log(res);
+        return res.json();
+    })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+
+export const updateHotels = (payload) =>
+    fetch(`${api}/hotels/update_hotel`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body: JSON.stringify(payload)
+    }).then(res => {
+        console.log(res);
+        return res.status;
+    })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+
+
+
