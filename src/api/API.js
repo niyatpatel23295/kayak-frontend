@@ -79,23 +79,6 @@ export const addCars = (payload) =>
             return error;
         });
 
-export const GetHotelDetails = (payload) =>
-    fetch(`${api}/hotels/GetHotelDetails`, {
-        method: 'POST',
-        headers: {
-            ...headers,
-            'Content-Type': 'application/json'
-        },
-        credentials: 'include',
-        body: JSON.stringify(payload)
-    }).then(res => {
-        console.log(res);
-        return res.json();
-    })
-        .catch(error => {
-            console.log("This is error");
-            return error;
-        });
 
 export const SubmitPaymentDetails = (payload) =>
     fetch(`${api}/SubmitPaymentDetails`, {
@@ -179,25 +162,6 @@ export const GetFlightDetails = (payload) =>
     }).then(res => {
         console.log(res);
         return res.json();
-    })
-        .catch(error => {
-            console.log("This is error");
-            return error;
-        });
-
-
-export const updateFlight = (payload) =>
-    fetch(`${api}/flight/updateFlight`, {
-        method: 'POST',
-        headers: {
-            ...headers,
-            'Content-Type': 'application/json'
-        },
-        credentials:'include',
-        body: JSON.stringify(payload)
-    }).then(res => {
-        console.log(res);
-        return res.status;
     })
         .catch(error => {
             console.log("This is error");
