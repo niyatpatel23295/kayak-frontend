@@ -9047,8 +9047,8 @@ span.NavTabSection {
 .FancyBackgroundImage
 {
     background-image: url("./images/background.jpg");
-    height: 700px;
-}
+    height: 990px;
+   }
 
 .kayaklogo{
     background-image: url("./images/KAYAK.png");
@@ -9264,6 +9264,7 @@ a.btn.btn-lg.btn-primary.carSubmitButton {
     background-color: #3e8e41;
 }
 
+/* HOTEL FILTER BOX*/
 span#HotelFilterbox {
     height: 200px;
     display: block;
@@ -9314,6 +9315,8 @@ span.HotelFilterboxRoomTitle, span.HotelFilterboxAdultsTitle, span.HotelFilterbo
     font-weight: 100;
 
 }
+/* HOTEL FILTER BOX*/
+
 
 .col-md-3.hotelFiltersContainer input{
     font-size: 20px;
@@ -9331,4 +9334,341 @@ span.HotelFilterboxRoomTitle, span.HotelFilterboxAdultsTitle, span.HotelFilterbo
     font-size: 20px;
     font-weight: 700;
     padding-left: 10px;
+}
+
+.flightFromDate input{
+    font-size: 20px;
+    font-weight: 700;
+    padding-left: 10px;
+}
+
+.carFromDate input{
+    font-size: 20px;
+    font-weight: 700;
+    padding-left: 10px;
+}
+
+.carToDate input{
+    font-size: 20px;
+    font-weight: 700;
+    padding-left: 10px;
+}
+
+
+
+
+/* FLIGHT FILTER BOX*/
+span#FlightFilterbox {
+    height: 300px;
+    display: block;
+}
+
+.FlightFilterboxTitle {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.FlightFilterboxRoom {
+    padding: 10px 0;
+    border-bottom: 1px solid lightgrey;
+}
+
+.FlightFilterboxAdults {
+    padding: 10px 0;
+    border-bottom: 1px solid lightgrey;
+}
+
+.FlightFilterboxChildren {
+    padding: 10px 0;
+}
+
+
+.FlightFilterboxRoom span{
+    padding: 0px 10px;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.FlightFilterboxAdults span{
+    padding: 0px 10px;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.FlightFilterboxChildren span{
+    padding: 0px 10px;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+span.FlightFilterboxRoomTitle, span.FlightFilterboxAdultsTitle, span.FlightFilterboxChildrenTitle {
+    width: 130px;
+    display: inline-block;
+    font-weight: 100;
+
+}
+/* HOTEL FILTER BOX*/
+
+.hotel div#react-autowhatever-location{
+    background-color: white;
+    height: auto;
+    width: 320px;
+    margin-left: -20px;
+    margin-top: 5px;
+}
+
+.hotel div#react-autowhatever-location li{
+
+    height: 41px;
+    font-size: 15px;
+    list-style-type: none;
+    text-align: left;
+    padding: 10px 0;
+    font-weight: 600;
+}
+
+.SearchListItemMainContainer {
+    background-color: white;
+    margin-bottom: 20px;
+    min-height: 250px;
+    text-align: left;
+
+}
+
+span.SearchListItemImage {
+    width: 30%;
+    display: inline-block;
+}
+
+span.SearchListItemMainContent {
+    width: 50%;
+    display: inline-block;
+}
+
+span.SearchListItemPriceContent {
+    width: 20%;
+    display: inline-block;
+    margin-bottom: 5px;
+    background-color: #f3f4f7;
+    float: right;
+    height: 180px;
+}
+
+.SearchListItemTitle {
+    font-size: 22px;
+}
+
+.SearchListItemAdd {
+    font-size: 15px;
+}
+
+.SearchListPageRightContainer {
+    float: right;
+    width: 210px;
+    margin-right: 100px;
+    margin-top: 20px;
+}
+
+.nav-side-menu
+{
+    top:auto;
+}
+
+.SearchListMainContainer{
+    padding-top: 20px;
+    padding-left: 51px;
+}
+
+.searchListPage .navbar-header {
+    position: absolute;
+    left: 150px;
+    top: 7px;
+}
+
+.searchListPage nav li a {
+    color: white;
+    background: #222;
+    font-size: 15px;
+    padding: 10px 3.6em;
+    font-family: "HelveticaNeue-Bold",Helvetica,Arial,sans-serif;
+    font-weight: 600;
+    letter-spacing: .03em;
+    top: -9px;
+}
+
+.container-fluid {
+
+}
+
+.nav-side-menu li {
+    color: black;
+
+}
+
+.SearchListItemRatings {
+    background-color: black;
+    color: white;
+    font-size: 14px;
+    width: 31px;
+    height: 30px;
+    padding-top: 3px;
+    padding-left: 6px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    margin-top: 5px;
+}
+
+.SearchListItemPrice {
+    font-size: 25px;
+    padding-top: 20px;
+    text-align: center;
+    font-weight: 600;
+}
+
+button.btn.btn-info.Viewdeal {
+    margin-left: 35px;
+    font-size: 15px;
+    margin-top: 20px;
+    font-weight: 500;
+    background-color: #ff690f;
+    border: #ff690f;
+
+}
+
+
+.Viewdeal.btn-info:not([disabled]):not(.disabled).active, .Viewdeal.btn-info:not([disabled]):not(.disabled):active, .show > .Viewdeal.btn-info.dropdown-toggle{
+    background-color: #ff690f;
+    border: #ff690f;
+}
+
+.SearchListItemStars {
+    padding: 10px 0;
+}
+
+
+button.starsButton {
+    color: black;
+    border: none;
+    background: no-repeat;
+    float: left;
+    cursor: pointer;
+    border-bottom: 1px solid;
+    width: 220px;
+    text-align: left;
+}
+
+
+.nav-side-menu li {
+    padding-left: 0px;
+    border-left: 3px solid #2e353d;
+    border-bottom: 1px solid #23282e;
+    border-right: 3px solid;
+}
+
+button.btn.btn-info.filterbuttons {
+    width: 140px;
+}
+
+img.footer {
+    width: 100%;
+}
+
+.nav-side-menu {
+    overflow: auto;
+    font-family: verdana;
+    font-size: 12px;
+    font-weight: 200;
+    background-color: #2e353d;
+    position: inherit;
+    top: 0px;
+    width: 300px;
+    height: 100%;
+    color: #e1ffff;
+}
+
+.rightpaneimage1,.rightpaneimage2
+{
+    width: 100%;
+}
+
+.SearchListPageRightContainer1 img {
+    margin-bottom: 30px;
+}
+
+.SearchListItemDesc {
+    font-size: 15px;
+}
+
+img.hoteldesc {
+    width: 150px;
+    padding-top: 5px;
+}
+
+.nav>li>a:focus, .nav>li>a:hover {
+    text-decoration: underline;
+    background-color: #222;
+}
+
+.flight div#react-autowhatever-flightFromLocation {
+    background-color: white;
+    height: auto;
+    width: 320px;
+    margin-left: -70px;
+    margin-top: 5px;
+}
+
+.flight div#react-autowhatever-flightFromLocation li {
+    height: 41px;
+    font-size: 15px;
+    list-style-type: none;
+    text-align: left;
+    padding: 10px 0;
+    font-weight: 600;
+}
+
+
+.flight div#react-autowhatever-flightToLocation {
+    background-color: white;
+    height: auto;
+    width: 320px;
+    margin-left: -56px;
+    margin-top: 5px;
+}
+
+.flight div#react-autowhatever-flightToLocation li {
+    height: 41px;
+    font-size: 15px;
+    list-style-type: none;
+    text-align: left;
+    padding: 10px 0;
+    font-weight: 600;
+}
+
+.aboveFooter {
+    background-color: #fff;
+    padding-top: 56px;
+    margin-top: 166px;
+}
+
+img.aboveFooterImage {
+    width: 60%;
+    padding: 40px 0;
+}
+
+.car div#react-autowhatever-carlocation {
+    background-color: white;
+    height: auto;
+    width: 320px;
+    margin-left: -171px;
+    margin-top: 5px;
+}
+
+.car div#react-autowhatever-carlocation li {
+    height: 41px;
+    font-size: 15px;
+    list-style-type: none;
+    text-align: left;
+    padding: 10px 0;
+    font-weight: 600;
 }
