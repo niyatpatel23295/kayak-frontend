@@ -133,7 +133,6 @@ var Content = React.createClass({
             });
 
     },
-    ,
 
     handleSearchCar() {
         var valueOfCity = document.getElementsByClassName("react-autosuggest__input")[0].getAttribute("value");
