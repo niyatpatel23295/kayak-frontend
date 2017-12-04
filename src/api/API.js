@@ -378,3 +378,43 @@ export const getlogs = () =>
             console.log("This is error"+error);
             return error;
         });
+
+//to get the selected room details for booking
+export const postSelectedRoom = (payload) =>
+    fetch(`${api}/hotels/get_selected_room`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body: JSON.stringify(payload)
+    }).then(res => {
+        console.log("hotels/search_hotels: "+res);
+        return res.json();
+    })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+
+
+export const getSelectedRoom = () =>
+    fetch(`${api}/hotels/get_selected_room`, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include'
+    }).then(res => {
+        console.log(res);
+        return res.json();
+    })
+        .catch(error => {
+            console.log("This is error"+error);
+            return error;
+        });
+
+
+
