@@ -7,17 +7,24 @@ import {Route, withRouter} from 'react-router-dom';
 
 
 var Content = React.createClass({
-    getInitialState () {
+   getInitialState () {
         return {
             roomNo: 0,
             roomNumStr: "",
             adultsNo: 0,
             guestNumStr: "",
             childrenNo : 0,
-            result:""
+            result:"",
+            adultF:0,
+            senior:0,
+            child:0,
+            infant:0,
+            flightStr:"",
+            traveller:0
         };
     },
-    handleAddNum(value) {
+    
+        handleAddNum(value) {
         var val = this.state.roomNo+1;
         this.setState({
             added: true
@@ -69,6 +76,7 @@ var Content = React.createClass({
     },
 
     handleSubNum(value) {
+        console.log("inside sub");
         if(value === "Room" && this.state.roomNo > 0){
             this.setState({
                 roomNo: this.state.roomNo-1,
@@ -93,6 +101,74 @@ var Content = React.createClass({
                 guestNumStr : this.state.adultsNo+this.state.childrenNo-1
             })
         }
+    },
+
+    handleAddFlightNum(value) {
+        console.log("Inside Add "+value);
+        var traveller = this.state.roomNo+1;
+        this.setState({
+            added: true
+        })
+        if(value === "Adults"){
+                this.setState({
+                    adultF: this.state.adultF+1,
+                    traveller : this.state.traveller+1
+                })
+        }else if(value === "Seniors"){
+                this.setState({
+                    senior: this.state.senior+1,
+                    traveller : this.state.traveller+1
+                })
+        }else if(value === "Child"){
+            this.setState({
+                child : this.state.child+1,
+                traveller : this.state.traveller+1
+            })
+        }
+        else if(value === "Infant"){
+            this.setState({
+                infant : this.state.infant+1,
+                traveller : this.state.traveller+1
+            })
+        }
+
+        // if((this.state.infant+this.state.adultF+this.state.child+this.state.senior)>0){
+        //     this.setState({
+        //         traveller : this.state.infant+this.state.adultF+this.state.child+this.state.senior
+        //     })
+        // }
+    },
+
+    handleSubFlightNum(value) {
+        console.log("Inside Sub "+value);
+        if(value === "Adults" && this.state.adultF > 0){
+            this.setState({
+                adultF: this.state.adultF-1,
+                traveller : this.state.traveller-1
+            })
+        }else if(value === "Seniors" && this.state.senior > 0){
+            this.setState({
+                senior: this.state.senior-1,
+                traveller : this.state.traveller-1
+            })
+        }
+        else if(value === "Child" && this.state.child > 0){
+            this.setState({
+                child: this.state.child-1,
+                traveller : this.state.traveller-1
+            })
+        }else if(value === "Infant" && this.state.infant>0){
+            this.setState({
+                infant : this.state.infant-1,
+                traveller : this.state.traveller-1
+            })
+        }
+
+        // if((this.state.infant+this.state.adultF+this.state.child+this.state.senior)>0){
+        //     this.setState({
+        //         traveller : this.state.infant+this.state.adultF+this.state.child+this.state.senior-1
+        //     })
+        // }
     },
 
     handleSearchHotels() {
@@ -217,6 +293,11 @@ var Content = React.createClass({
             str = "";
         }
 
+        var str2 ="";
+        if(this.state.traveller > 0){
+            str2 = this.state.traveller + " traveler";
+        }
+
         return(
             <div className="content">
                 {this.props.currentTab === 1 ?
@@ -320,7 +401,7 @@ var Content = React.createClass({
                                     </div>*/}
 
                                     <div className="col-md-3 flightFiltersContainer" style={{textAlign:"left"}}>
-                                        <input type="text"  value={str} /><span className="caret"  data-toggle="collapse" data-target="#demo"/>
+                                        <input type="text"  value={str2} /><span className="caret"  data-toggle="collapse" data-target="#demo"/>
                                         <div id="demo" className="col-md-9 collapse" onFocus={this.handleCollapse} onBlur={this.handleCollapseOut} style={{textAlign:"left",backgroundColor:"white",paddingBottom:10,maxWidth: "unset",marginTop: "5px", marginLeft:"20px", boxShadow:"0 3px 12px 1px rgba(0,0,0,0.26)", height:"300px" }}>
                                             <span id="FlightFilterbox">
                                                 <div>
