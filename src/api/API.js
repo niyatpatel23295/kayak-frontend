@@ -384,3 +384,19 @@ export const getFlightSearchResults = () =>
         });
 
 
+export const getlogs = () =>
+    fetch(`${api}/getlogs`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include'
+    }).then(res => {
+        
+        return res.json();
+    })
+        .catch(error => {
+            console.log("This is error"+error);
+            return error;
+        });

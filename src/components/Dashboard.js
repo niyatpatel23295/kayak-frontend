@@ -1,39 +1,62 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {Route, withRouter} from 'react-router-dom';
-import {Pie} from 'react-chartjs-2';
-
-
-  var data = {
-      labels: ["San Franscisco", "San Jose", "Ahmedabad"],
-      datasets: [{
-          label: '# of Votes',
-          data: [4300, 3000, 1200],
-          backgroundColor: [
-              '#9B2335',
-              '#DFCFBE',
-              '#55B4B0'
-          ]
-      }]
-  }
-
-
-var MyComponent = React.createClass({
-  render: function() {
-    return <Pie ref='chart' data={data} 
-    width={100}
-    height={20}
-    
-    />
-  }
-});
+import {Pie, Bar} from 'react-chartjs-2';
+import * as API from '../api/API';
 
 
 class Dashboard extends Component{
+
+    state = {
+       
+        data:{
+          labels: ['topPane'],
+          datasets: [{
+              label: 'Click Stream Data',
+              data: [10],
+              backgroundColor: [
+                  '#9B2335',
+                  '#DFCFBE',
+                  '#55B4B0',
+                  '#523454'
+              ]
+          }]
+        }
+    }
+
+  componentWillMount(){
+    API.getlogs()
+        .then((res) => {
+            if (res) {
+                var labels = [];
+                var data_chart = [];
+                res.forEach(function(element, index){
+                  this.state.data.labels.push(element.key);
+                  this.state.data.datasets[0].data.push(element.value);
+                }.bind(this));
+                
+                
+                console.log(this.state.data.labels)
+            } else {
+            }
+        });    
+  }
   render(){
+    console.log(JSON.stringify(this.state.data));
     return (
-      
-      <MyComponent />
+      <div>
+          <Pie ref='chart' data={this.state.data} 
+            width={100}
+            height={20}
+        
+          />
+          <Bar ref='chart' data={this.state.data} 
+            width={100}
+            height={20}
+        
+          />      
+      </div>
+
     )
   }
 

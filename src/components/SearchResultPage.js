@@ -5,11 +5,7 @@ import stars5 from '.././images/5stars.png'
 import stars4 from '.././images/4stars.png'
 import stars3 from '.././images/3stars.png'
 import stars2 from '.././images/2stars.png'
-import hotel1 from '.././images/hotel1.jpg'
-import hotel2 from '.././images/hotel2.jpg'
-import hotel3 from '.././images/hotel3.jpg'
-import hotel4 from '.././images/hotel4.jpg'
-import hotel5 from '.././images/hotel5.jpg'
+
 
 import footer from '.././images/footer.png'
 import rightpaneimage1 from '.././images/rightPaneImage1.png'
