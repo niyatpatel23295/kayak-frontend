@@ -10,6 +10,7 @@ import rightpaneimage1 from '.././images/rightPaneImage1.png'
 import rightpaneimage2 from '.././images/rightPaneImage2.png'
 import hoteldesc from '.././images/hoteldesc.png'
 import * as API from '../api/API';
+import {withRouter} from "react-router-dom";
 
 class SearchResultPage extends React.Component {
     constructor(props) {
@@ -17,14 +18,44 @@ class SearchResultPage extends React.Component {
         this.state = {
             searchResults: []
         };
+        this.bookItem= this.bookItem.bind(this);
     }
 
 
+    bookItem(task){
+        console.log("task strigified "+JSON.stringify(task));
+        console.log("task json "+task);
+        //create json
+
+        var JSON_filter = {
+            "filter": task
+        };
+
+        API.postSelectedHotelToBook(JSON_filter)
+            .then((data) => {
+                if (data.message === "Success") {
+                    //console.log("Response: " + JSON.stringify(data));
+                    this.setState({
+                        result: data
+                    });
+                    // this.props.history.push("/searchItem");
+                    this.props.history.push({
+                        pathname: '/bookItem',
+                        state: {result: data}
+                    });
+                } else {
+                    this.setState({
+                        message: "Hotel Search: Bad Query"
+                    });
+                }
+            });
+
+    }
 
     componentDidMount() {
         API.getHotelSearchResults()
             .then((data) => {
-                console.log(JSON.stringify(data.data[0]));
+                console.log(data.data[0]);
                 this.setState({
                     searchResults: data.data
                 });
@@ -153,7 +184,7 @@ class SearchResultPage extends React.Component {
                                 </span>
                                 <span className="SearchListItemPriceContent">
                                     <div className="SearchListItemPrice">$ {task.hotel_stars}</div>
-                                    <button type="button" className="btn btn-info Viewdeal" >View Deal</button>
+                                    <button type="button" className="btn btn-info Viewdeal" onClick={() => this.bookItem(task)} >Book Now</button>
                                 </span>
                             </div>
                         )}
@@ -178,4 +209,4 @@ class SearchResultPage extends React.Component {
     }
 }
 
-export default SearchResultPage;
+export default withRouter(SearchResultPage);
