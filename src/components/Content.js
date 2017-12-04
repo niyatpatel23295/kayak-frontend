@@ -133,6 +133,78 @@ var Content = React.createClass({
             });
 
     },
+    ,
+
+    handleSearchCar() {
+        var valueOfCity = document.getElementsByClassName("react-autosuggest__input")[0].getAttribute("value");
+        var valueOfFromDate = document.getElementsByClassName("carFromDate")[0].children[0].children[0].getAttribute("value");
+        var valueOfToDate = document.getElementsByClassName("carToDate")[0].children[0].children[0].getAttribute("value");
+
+        var JSON_filter = {
+            "filter": {
+                "city_name": valueOfCity,
+                "from_date" : valueOfFromDate,
+                "to_date" : valueOfToDate
+            }
+        };
+        console.log(JSON_filter);
+
+        API.doHotelSearch(JSON_filter)
+            .then((data) => {
+                if (data.message === "Success") {
+                    //console.log("Response: " + JSON.stringify(data));
+                    this.setState({
+                        result: data
+                    });
+                    // this.props.history.push("/searchItem");
+                    this.props.history.push({
+                        pathname: '/searchItem',
+                        state: {result: data}
+                    });
+                } else {
+                    this.setState({
+                        message: "Hotel Search: Bad Query"
+                    });
+                }
+            });
+
+    },
+
+    handleSearchFlight() {
+        var to_airport = document.getElementsByClassName("react-autosuggest__input")[0].getAttribute("value");
+        var from_airport = document.getElementsByClassName("react-autosuggest__input")[1].getAttribute("value");
+        var flightFromDate = document.getElementsByClassName("flightFromDate")[0].children[0].children[0].getAttribute("value");
+
+        var JSON_filter = {
+            "filter": {
+                "to_airport": to_airport,
+                "from_airport": from_airport,
+                "departure_date": flightFromDate,
+                "flex_days" : 1
+            }
+        };
+        console.log(JSON_filter);
+
+        API.doFlightSearch(JSON_filter)
+            .then((data) => {
+                if (data.message === "Success") {
+                    //console.log("Response: " + JSON.stringify(data));
+                    this.setState({
+                        result: data
+                    });
+                    // this.props.history.push("/searchItem");
+                    this.props.history.push({
+                        pathname: '/searchFlight',
+                        state: {result: data}
+                    });
+                } else {
+                    this.setState({
+                        message: "Flight Search: Bad Query"
+                    });
+                }
+            });
+
+    },
 
     render: function(){
         var str;
