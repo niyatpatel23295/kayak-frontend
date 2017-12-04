@@ -417,4 +417,22 @@ export const getSelectedRoom = () =>
         });
 
 
+export const updateHotels = (payload) =>
+fetch(`${api}/hotels/update_hotel`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+        'Content-Type': 'application/json'
+    },
+    credentials:'include',
+    body: JSON.stringify(payload)
+}).then(res => {
+    console.log(res);
+return res.status;
+})
+.catch(error => {
+    console.log("This is error");
+return error;
+});
+
 
