@@ -9820,3 +9820,23 @@ button.btn.btn-info.FlightViewdeal {
 span.SearchListItemFlightConnImage {
     margin-left: -60px;
 }
+
+a.customAccount {
+    margin-left: 923px;
+    font-size: medium;
+    margin-top: 10px;
+}
+
+.ModalLoggedOutDiv {
+    margin-top: 24px;
+    padding-right: 0px;
+    margin-left: -65px;
+}
+
+.modal-body1 {
+    position: relative;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 15px;
+    width: 175px;
+}
