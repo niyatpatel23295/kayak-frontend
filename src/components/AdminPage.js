@@ -11,12 +11,17 @@ class AdminPage extends Component {
         return (
             <div>
                 <Route exact path="/AdminPage" render={() => (
-                    <div className='row'>
+                    <div className='row' style={{minHeight:'500px'}}>
                         <div className='col-md-12'>
+                            <nav className="navbar navbar-inverse">
+                                <div className="container-fluid">
+                                    <div className="navbar-header">
+                                        <a className="navbar-brand" href="/"><img src={kayak} width={140} style={{paddingTop: 15}}/></a>
+                                    </div>
+                                    <h2 style={{color:'white'}}>Admininstrator console</h2>
+                                </div>
+                            </nav>
 
-                            <h1>Administrator Console
-                                <hr/>
-                            </h1>
                         </div>
                         <div className="nav-side-menu col-md-2" style={{textAlign: 'Left'}}>
                             <a className="navbar-brand" href="/"><img src={kayak} width={110} style={{paddingTop: 15}}/></a>

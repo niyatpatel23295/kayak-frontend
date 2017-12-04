@@ -1,13 +1,7 @@
 import React from 'react'
-import img1 from '.././images/AccountIcon.png'
 import kayak from '.././images/KAYAK.png'
-import stars5 from '.././images/5stars.png'
-import stars4 from '.././images/4stars.png'
-import stars3 from '.././images/3stars.png'
-import stars2 from '.././images/2stars.png'
 import rightpaneimage1 from '.././images/rightPaneImage1.png'
 import rightpaneimage2 from '.././images/rightPaneImage2.png'
-import hoteldesc from '.././images/hoteldesc.png'
 import * as API from '../api/API';
 
 class SearchCarResultPage extends React.Component {
@@ -19,7 +13,7 @@ class SearchCarResultPage extends React.Component {
     }
 
     componentDidMount() {
-        API.getHotelSearchResults()
+        API.getCarSearchResults()
             .then((data) => {
                 console.log(JSON.stringify(data.data[0]));
                 this.setState({
@@ -82,44 +76,70 @@ class SearchCarResultPage extends React.Component {
                     <div className="col-md-6 SearchListMainContainer">
                         {this.state.searchResults.map((task, i) =>
                             <div className="SearchListItemMainContainer">
-                                <span className="SearchListItemImage">
-                                    <img src={task.hotel_image}/>
-                                </span>
-                                <span className="SearchListItemMainContent">
-                                    <div className="SearchListItemTitle">{task.hotel_name}</div>
-                                    <div className="SearchListItemAdd">{task.hotel_address}</div>
+                                <span className="SearchListItemCarMainContent">
+                                    <div className="SearchListItemTitle">{task.car_model}</div>
+                                    <div className="SearchListItemAdd">{task.car_class}</div>
                                     <div className="SearchListItemStars">
-
                                         {
-                                            task.hotel_stars == "5" ? (
 
-                                                <img className="recentImage" src={stars5} alt={'logo5'}/>
-                                            ) : (
-                                                task.hotel_stars == "4" ? (
-                                                    <img className="recentImage" src={stars4} alt={'logo4'}/>
-                                                ) : (
-                                                    task.hotel_stars == "3" ? (
-
-                                                        <img className="recentImage" src={stars3} alt={'logo3'}/>
-                                                    ) : (
-                                                        task.hotel_stars == "2" ? (
-
-                                                            <img className="recentImage" src={stars2} alt={'logo2'}/>
-                                                        ) : (
-                                                            <img className="recentImage" src={stars2} alt={'logo2'}/>
-                                                        )
-                                                    )
-                                                )
-                                            )
                                         }</div>
-                                    <div className="SearchListItemRatings">{task.hotel_ratings}</div>
-                                    <div className="SearchListItemDesc">{task.hotel_description}</div>
-                                    <div className="SearchListItem">
-                                        <img className="hoteldesc" src={hoteldesc} alt={'hoteldesc'}/>
+                                    <div className="SearchListItemPass">
+                                        <img className="passengerIcon" src={"http://localhost:3000/images/passengerIcon.png"} alt={'car'}/>
+                                        {task.no_passangers}
                                     </div>
+                                    <div className="SearchListItemBag">
+                                        <img className="largeBagIcon" src={"http://localhost:3000/images/largeBagIcon.png"} alt={'car'}/>
+                                        {task.no_largebags}</div>
+                                    <div className="SearchListItemDoor">
+                                        <img className="doorIcon" src={"http://localhost:3000/images/doorIcon.png"} alt={'car'}/>
+                                        {task.no_door}</div>
+
+                                </span>
+                                <span className="SearchListItemCarImage">
+                                     {
+                                         i % 10 == 1 ?(
+                                             <img className="carImage" src={"http://localhost:3000/images/car1.png"} alt={'car'}/>
+                                         ) :(
+                                             i % 10 == 2 ?(
+                                                 <img className="carImage" src={"http://localhost:3000/images/car2.png"} alt={'car'}/>
+                                             ) :(
+                                                 i % 10 == 3 ?(
+                                                     <img className="carImage" src={"http://localhost:3000/images/car3.png"} alt={'car'}/>
+                                                 ) :(
+                                                     i % 10 == 4 ?(
+                                                         <img className="carImage" src={"http://localhost:3000/images/car4.png"} alt={'car'}/>
+                                                     ) :(
+                                                         i % 10 == 5 ?(
+                                                             <img className="carImage" src={"http://localhost:3000/images/car5.png"} alt={'car'}/>
+                                                         ) :(
+                                                             i % 10 == 6 ?(
+                                                                 <img className="carImage" src={"http://localhost:3000/images/car6.png"} alt={'car'}/>
+                                                             ) :(
+                                                                 i % 10 == 7 ?(
+                                                                     <img className="carImage" src={"http://localhost:3000/images/car7.png"} alt={'car'}/>
+                                                                 ) :(
+                                                                     i % 10 == 8 ?(
+                                                                         <img className="carImage" src={"http://localhost:3000/images/car8.png"} alt={'car'}/>
+                                                                     ) :(
+                                                                         i % 10 == 9 ?(
+                                                                             <img className="carImage" src={"http://localhost:3000/images/car9.png"} alt={'car'}/>
+                                                                         ) :(
+                                                                             <img className="carImage" src={"http://localhost:3000/images/car0.png"} alt={'car'}/>
+                                                                         )
+                                                                     )
+                                                                 )
+                                                             )
+                                                         )
+                                                     )
+                                                 )
+                                             )
+                                         )
+
+                                     }
+
                                 </span>
                                 <span className="SearchListItemPriceContent">
-                                    <div className="SearchListItemPrice">$ {task.hotel_stars}</div>
+                                    <div className="SearchListItemPrice">$ {task.price}</div>
                                     <button type="button" className="btn btn-info Viewdeal" >View Deal</button>
                                 </span>
                             </div>
