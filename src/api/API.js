@@ -168,6 +168,7 @@ export const GetFlightDetails = (payload) =>
             return error;
         });
 
+
 export const getAirports = () =>
     fetch(`${api}/getAirports`, {
         method: 'GET',
@@ -347,8 +348,39 @@ export const getSelectedHotelToBook = () =>
             return error;
         });
 
+export const doFlightSearch = (payload) =>
+    fetch(`${api}/flights/search_flights`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body: JSON.stringify(payload)
+    }).then(res => {
+        console.log("hotels/search_hotels: "+res);
+        return res.json();
+    })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
 
-
-
+export const getFlightSearchResults = () =>
+    fetch(`${api}/flights/search_flights`, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include'
+    }).then(res => {
+        console.log(res);
+        return res.json();
+    })
+        .catch(error => {
+            console.log("This is error"+error);
+            return error;
+        });
 
 
