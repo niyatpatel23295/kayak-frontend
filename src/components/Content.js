@@ -355,8 +355,7 @@ var Content = React.createClass({
                                     </div>
 
                                     <div className={"col-md-1"}>
-                                        <a className="btn btn-lg btn-primary flightSubmitButton"
-                                           role="button">--&raquo;</a>
+                                        <a className="btn btn-lg btn-primary flightSubmitButton"role="button" onClick={this.handleSearchFlight}>--&raquo;</a>
                                     </div>
 
                                 </div>
