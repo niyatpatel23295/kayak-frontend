@@ -18,6 +18,8 @@ import AdminPage from './AdminPage';
 import SignIn from './SignIn';
 import AddHotelComponent from './AddHotelComponent';
 import SearchResultPage from './SearchResultPage';
+import SearchCarResultPage from './SearchCarResultPage';
+import SearchFlightResultPage from './SearchFlightResultPage';
 import Tabs from './Tabs';
 import NavTabs from './NavTabs';
 import Content from './Content';
@@ -391,6 +393,12 @@ class HomePage extends Component {
                 )}/>
                 <Route exact path="/searchItem" render={() => (
                     <SearchResultPage searchResult={this.state.result}/>
+                )}/>
+                <Route exact path="/searchCar" render={() => (
+                    <SearchCarResultPage searchResult={this.state.result}/>
+                )}/>
+                <Route exact path="/searchFlight" render={() => (
+                    <SearchFlightResultPage searchResult={this.state.result}/>
                 )}/>
                 <Route exact path="/updateHotels" render={() => (
                     <UpdateHotelComponent/>
