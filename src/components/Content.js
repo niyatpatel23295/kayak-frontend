@@ -409,27 +409,27 @@ var Content = React.createClass({
                                                 </div>
                                                 <div className="FlightFilterboxRoom">
                                                     <span className="FlightFilterboxRoomTitle">Adults</span>
-                                                    <span><button onClick={() => this.handleSubNum("Room")}>-</button></span>
-                                                    <span style={{paddingRight:5,paddingLeft:5}}> {this.state.roomNo} </span>
-                                                    <span><button onClick={() => this.handleAddNum("Room")}>+</button></span>
+                                                    <span><button onClick={() => this.handleSubFlightNum("Adults")}>-</button></span>
+                                                    <span style={{paddingRight:5,paddingLeft:5}}> {this.state.adultF} </span>
+                                                    <span><button onClick={() => this.handleAddFlightNum("Adults")}>+</button></span>
                                                 </div>
                                                  <div className="FlightFilterboxAdults">
                                                     <span className="FlightFilterboxAdultsTitle">Seniors</span>
-                                                    <span><button onClick={() => this.handleSubNum("Adults")}>-</button></span>
-                                                    <span style={{paddingRight:5,paddingLeft:5}}> {this.state.adultsNo} </span>
-                                                    <span><button onClick={() => this.handleAddNum("Adults")}>+</button></span>
+                                                    <span><button onClick={() => this.handleSubFlightNum("Seniors")}>-</button></span>
+                                                    <span style={{paddingRight:5,paddingLeft:5}}> {this.state.senior} </span>
+                                                    <span><button onClick={() => this.handleAddFlightNum("Seniors")}>+</button></span>
                                                 </div>
                                                  <div className="FlightFilterboxChildren">
                                                     <span className="FlightFilterboxChildrenTitle">Child</span>
-                                                   <span><button onClick={() => this.handleSubNum("Children")}> - </button></span>
-                                                      <span style={{paddingRight:5,paddingLeft:5}}> {this.state.childrenNo} </span>
-                                                    <span><button onClick={() => this.handleAddNum("Children")}>+</button></span>
+                                                   <span><button onClick={() => this.handleSubFlightNum("Child")}> - </button></span>
+                                                      <span style={{paddingRight:5,paddingLeft:5}}> {this.state.child} </span>
+                                                    <span><button onClick={() => this.handleAddFlightNum("Child")}>+</button></span>
                                                 </div>
                                                 <div className="FlightFilterboxChildren">
                                                     <span className="FlightFilterboxChildrenTitle">Infant</span>
-                                                   <span><button onClick={() => this.handleSubNum("Children")}> - </button></span>
-                                                      <span style={{paddingRight:5,paddingLeft:5}}> {this.state.childrenNo} </span>
-                                                    <span><button onClick={() => this.handleAddNum("Children")}>+</button></span>
+                                                   <span><button onClick={() => this.handleSubFlightNum("Infant")}> - </button></span>
+                                                      <span style={{paddingRight:5,paddingLeft:5}}> {this.state.infant} </span>
+                                                    <span><button onClick={() => this.handleAddFlightNum("Infant")}>+</button></span>
                                                 </div>
                                             </span>
                                         </div>
