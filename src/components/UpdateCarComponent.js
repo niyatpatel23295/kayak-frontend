@@ -4,68 +4,74 @@ import Rater from 'react-rater'
 import 'react-rater/lib/react-rater.css'
 import kayak from '../images/KAYAK.png';
 import * as API from '../api/API';
+import MyAutosuggest from "./MyAutoSuggest";
 
-class UpdateFlightComponent extends Component {
+class UpdateCarComponent extends Component {
     state = {
-        fid:'',
-        flight_name: '',
-        to_airport: '',
-        from_airport: '',
-        departure: '',
-        arrival: '',
-        class: '',
-        fair: '',
-        flight_number: '',
-        duration: '',
-        FlightDetails:''
+        car_model: '',
+        no_passangers: '',
+        no_largebags: '',
+        no_door: '',
+        car_class: '',
+        price: '',
+        cid: '',
+        pickup_address: '',
+        searchCar_key: ''
     }
 
-    handleUpdateFlight = () => {
-        API.updateFlight(this.state)
+    constructor(props) {
+        super(props);
+        this.handleSearchCars = this.handleSearchCars.bind(this);
+    }
+
+    handleSearchCars() {
+        console.log("SearchCar: " + document.getElementsByClassName("react-autosuggest__input")[0].getAttribute("value"));
+        var valueOfCity = document.getElementsByClassName("react-autosuggest__input")[0].getAttribute("value");
+        this.setState({
+            city: valueOfCity
+        })
+    }
+
+    handleGetCarDetails = () => {
+        //    this.handleSearchCars();
+        console.log(this.state.searchCar_key);
+
+        API.get_car_details(this.state)
+            .then((res) => {
+                if (res.data) {
+                    console.log(res);
+                    console.log("res.data[0].car_model"+res.data[0].car_model)
+                    this.setState ({
+                        car_model: res.data[0].car_model,
+                        no_passangers: res.data[0].no_passangers,
+                        no_largebags: res.data[0].no_largebags,
+                        no_door: res.data[0].no_door,
+                        car_class: res.data[0].car_class,
+                        price: res.data[0].price,
+                        pickup_address: res.data[0].pickup_address,
+                        cid: res.data[0].cid
+
+                    });
+                } else if (res) {
+                    console.log("Error");
+                }
+            })
+    };
+
+    handleUpdateCar = () => {
+        this.handleSearchCars();
+        API.updateCars(this.state)
             .then((status) => {
                 if (status === 201) {
                     this.setState({
-
-                        message: "flight updated..!!",
+                        message: "Car updated..!!",
                     });
                 } else if (status === 401) {
                     this.setState({
-
                         message: "Error.. Try again..!!"
                     });
                 }
             });
-    };
-
-    handleGetFlightDetails = () => {
-        console.log("this.state.searchFlight_key ",this.state.searchFlight_key);
-        this.setState({
-            message:''
-        })
-        API.GetFlightDetails(this.state)
-            .then((res) => {
-                console.log(res.data[0]);
-                if (res.data) {
-                    console.log(res.data[0].hid);
-                    this.setState({
-                        flight_name: res.data[0].flight_name,
-                        to_airport:res.data[0].to_airport,
-                        from_airport:res.data[0].from_airport,
-                        departure:res.data[0].departure,
-                        arrival:res.data[0].arrival,
-                        class:res.data[0].class,
-                        fair:res.data[0].fair,
-                        flight_number:res.data[0].flight_number,
-                        duration:res.data[0].duration,
-                        FlightDetails:res.data[0].FlightDetails
-                    });
-                } else if (res.error_message) {
-                    this.setState({
-                        message : res.error_message
-                    })
-                    console.log(res);
-                }
-            })
     };
 
     render() {
@@ -130,79 +136,76 @@ class UpdateFlightComponent extends Component {
                         <div className="col-md-10 ">
                             <form className="form-horizontal">
                                 <fieldset>
-                                    <h2>Add Flights</h2>
+                                    <h2>Update Car</h2>
                                     <div className="form-group">
-                                        <label className="col-md-4 control-label">Enter Flight Name to search : </label>
+                                        <label className="col-md-4 control-label">Enter Car ID to search : </label>
                                         <div className="col-md-4">
                                             <div className="input-group">
-                                                <div className="input-group-addon">
-                                                    <i className="fa fa-user">
-                                                    </i>
-                                                </div>
                                                 <input id="Hotel Name" name="hotelName" type="text"
-                                                       placeholder="Flight ID" value={this.state.searchFlight_key}
+                                                       placeholder="Car Model" value={this.state.searchCar_key}
                                                        onChange={(event) => {
                                                            this.setState({
-                                                               searchFlight_key: event.target.value
+                                                               searchCar_key: event.target.value
                                                            });
                                                        }} className="form-control input-md"/>
                                             </div>
                                         </div>
                                         <div className="col-md-4">
-                                            <a href="#" className="btn btn-success" onClick={this.handleGetFlightDetails}><span
+                                            <a href="#" className="btn btn-success"
+                                               onClick={this.handleGetCarDetails}><span
                                                 className="glyphicon glyphicon-thumbs-up"/> Search</a>
                                         </div>
                                     </div>
                                     <hr/>
                                     <div className="form-group">
-                                        <label className="col-md-4 control-label">Flight Name </label>
+                                        <label className="col-md-4 control-label">Car Model </label>
                                         <div className="col-md-4">
                                             <div className="input-group">
-                                                <input id="Flight Name" name="flightName" type="text"
-                                                       placeholder={this.state.flight_name} value={this.state.flight_name}
+                                                <input type="text"
+                                                       placeholder="Car Model" value={this.state.car_model}
                                                        onChange={(event) => {
                                                            this.setState({
-                                                               flight_name: event.target.value
+                                                               car_model: event.target.value
                                                            });
                                                        }} className="form-control input-md"/>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="form-group">
-                                        <label className="col-md-4 control-label"> To airport </label>
+                                        <label className="col-md-4 control-label"> No. of passangers </label>
                                         <div className="col-md-2  col-xs-4">
                                             <input type="text"
-                                                   placeholder={ this.state.to_airport} value={this.state.to_airport}
+                                                   placeholder="No. of passangers" value={this.state.no_passangers}
                                                    onChange={(event) => {
                                                        this.setState({
-                                                           to_airport: event.target.value
+                                                           no_passangers: event.target.value
                                                        });
                                                    }} className="form-control input-md "/>
                                         </div>
                                     </div>
                                     <div className="form-group">
-                                        <label className="col-md-4 control-label"> From airport </label>
+                                        <label className="col-md-4 control-label"> No. of Largebags </label>
                                         <div className="col-md-2  col-xs-4">
                                             <input type="text"
-                                                   placeholder={this.state.from_airport} value={this.state.from_airport}
+                                                   placeholder="No. of Largebags" value={this.state.no_largebags}
                                                    onChange={(event) => {
                                                        this.setState({
-                                                           from_airport: event.target.value
+                                                           no_largebags: event.target.value
                                                        });
                                                    }} className="form-control input-md "/>
                                         </div>
                                     </div>
 
                                     <div className="form-group">
-                                        <label className="col-md-4 control-label">Departure </label>
+                                        <label className="col-md-4 control-label">No. of Doors</label>
                                         <div className="col-md-4">
                                             <div className="input-group">
                                                 <input type="text"
-                                                       placeholder={this.state.departure}
-                                                       value={this.state.departure}
+                                                       placeholder="No of doors "
+                                                       value={this.state.no_door}
                                                        onChange={(event) => {
                                                            this.setState({
-                                                               departure: event.target.value
+                                                               no_door: event.target.value
                                                            });
                                                        }} className="form-control input-md"/>
                                             </div>
@@ -210,15 +213,15 @@ class UpdateFlightComponent extends Component {
                                     </div>
 
                                     <div className="form-group">
-                                        <label className="col-md-4 control-label">Arrival </label>
+                                        <label className="col-md-4 control-label">Class </label>
                                         <div className="col-md-4">
                                             <div className="input-group">
                                                 <input type="text"
-                                                       placeholder={this.state.arrival}
-                                                       value={this.state.arrival}
+                                                       placeholder="class "
+                                                       value={this.state.car_class}
                                                        onChange={(event) => {
                                                            this.setState({
-                                                               arrival: event.target.value
+                                                               car_class: event.target.value
                                                            });
                                                        }} className="form-control input-md"/>
                                             </div>
@@ -226,15 +229,15 @@ class UpdateFlightComponent extends Component {
                                     </div>
 
                                     <div className="form-group">
-                                        <label className="col-md-4 control-label">class </label>
+                                        <label className="col-md-4 control-label">Price </label>
                                         <div className="col-md-4">
                                             <div className="input-group">
                                                 <input type="text"
-                                                       placeholder={this.state.class}
-                                                       value={this.state.class}
+                                                       placeholder="price"
+                                                       value={this.state.price}
                                                        onChange={(event) => {
                                                            this.setState({
-                                                               class: event.target.value
+                                                               price: event.target.value
                                                            });
                                                        }} className="form-control input-md"/>
                                             </div>
@@ -242,15 +245,15 @@ class UpdateFlightComponent extends Component {
                                     </div>
 
                                     <div className="form-group">
-                                        <label className="col-md-4 control-label">Fair </label>
+                                        <label className="col-md-4 control-label">Pickup address </label>
                                         <div className="col-md-4">
                                             <div className="input-group">
                                                 <input type="text"
-                                                       placeholder={this.state.fair}
-                                                       value={this.state.fair}
+                                                       placeholder="Pickup address"
+                                                       value={this.state.pickup_address}
                                                        onChange={(event) => {
                                                            this.setState({
-                                                               fair: event.target.value
+                                                               pickup_address: event.target.value
                                                            });
                                                        }} className="form-control input-md"/>
                                             </div>
@@ -258,32 +261,16 @@ class UpdateFlightComponent extends Component {
                                     </div>
 
                                     <div className="form-group">
-                                        <label className="col-md-4 control-label">Flight_number </label>
+                                        <label className="col-md-4 control-label">City </label>
                                         <div className="col-md-4">
                                             <div className="input-group">
-                                                <input type="text"
-                                                       placeholder={this.state.flight_number}
-                                                       value={this.state.flight_number}
-                                                       onChange={(event) => {
-                                                           this.setState({
-                                                               flight_number: event.target.value
-                                                           });
-                                                       }} className="form-control input-md"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="form-group">
-                                        <label className="col-md-4 control-label">Duration </label>
-                                        <div className="col-md-4">
-                                            <div className="input-group">
-                                                <input type="text"
-                                                       placeholder={this.state.duration}
-                                                       value={this.state.duration}
-                                                       onChange={(event) => {
-                                                           this.setState({
-                                                               duration: event.target.value
-                                                           });
-                                                       }} className="form-control input-md"/>
+                                                <div className="col-md-2  col-xs-4">
+                                                    <MyAutosuggest
+                                                        id="location"
+                                                        placeholder="City"
+                                                        onChange={this.onChange}
+                                                    />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -291,7 +278,7 @@ class UpdateFlightComponent extends Component {
                                     <div className="form-group">
                                         <label className="col-md-4 control-label"/>
                                         <div className="col-md-4">
-                                            <a href="#" className="btn btn-success" onClick={this.handleUpdateFlight}><span
+                                            <a href="#" className="btn btn-success" onClick={this.handleUpdateCar}><span
                                                 className="glyphicon glyphicon-thumbs-up"/> Submit</a>
                                             <a href="#" className="btn btn-danger" value=""><span
                                                 className="glyphicon glyphicon-remove-sign"/> Clear</a>
@@ -307,4 +294,4 @@ class UpdateFlightComponent extends Component {
     }
 }
 
-export default withRouter(UpdateFlightComponent);
+export default withRouter(UpdateCarComponent);

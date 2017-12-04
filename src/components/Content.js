@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import MyAutosuggest from "./MyAutoSuggest";
 import DateTime from 'react-datetime';
+import * as API from '../api/API';
+import {Route, withRouter} from 'react-router-dom';
 
 
 var Content = React.createClass({
@@ -11,7 +13,8 @@ var Content = React.createClass({
             roomNumStr: "",
             adultsNo: 0,
             guestNumStr: "",
-            childrenNo : 0
+            childrenNo : 0,
+            result:""
         };
     },
     handleAddNum(value) {
@@ -92,6 +95,116 @@ var Content = React.createClass({
         }
     },
 
+    handleSearchHotels() {
+        var valueOfCity = document.getElementsByClassName("react-autosuggest__input")[0].getAttribute("value");
+        var valueOfFromDate = document.getElementsByClassName("hotelFromDate")[0].children[0].children[0].getAttribute("value");
+        var valueOfToDate = document.getElementsByClassName("hotelToDate")[0].children[0].children[0].getAttribute("value");
+        var total = this.state.adultsNo + this.state.childrenNo;
+        var JSON_filter = {
+            "filter": {
+                "city_name": valueOfCity,
+                "hotel_price": "",
+                "hotel_ratings": "",
+                "no_rooms" : this.state.roomNo,
+                "no_guests" : total,
+                "from_date" : valueOfFromDate,
+                "to_date" : valueOfToDate
+            }
+        };
+        console.log(JSON_filter);
+
+        API.doHotelSearch(JSON_filter)
+            .then((data) => {
+                if (data.message === "Success") {
+                    //console.log("Response: " + JSON.stringify(data));
+                    this.setState({
+                        result: data
+                    });
+                    // this.props.history.push("/searchItem");
+                    this.props.history.push({
+                        pathname: '/searchItem',
+                        state: {result: data}
+                    });
+                } else {
+                    this.setState({
+                        message: "Hotel Search: Bad Query"
+                    });
+                }
+            });
+
+    },
+
+    handleSearchCar() {
+        var valueOfCity = document.getElementsByClassName("react-autosuggest__input")[0].getAttribute("value");
+        var valueOfFromDate = document.getElementsByClassName("carFromDate")[0].children[0].children[0].getAttribute("value");
+        var valueOfToDate = document.getElementsByClassName("carToDate")[0].children[0].children[0].getAttribute("value");
+
+        var JSON_filter = {
+            "filter": {
+                "city_name": valueOfCity,
+                "from_date" : valueOfFromDate,
+                "to_date" : valueOfToDate
+            }
+        };
+        console.log(JSON_filter);
+
+        API.doHotelSearch(JSON_filter)
+            .then((data) => {
+                if (data.message === "Success") {
+                    //console.log("Response: " + JSON.stringify(data));
+                    this.setState({
+                        result: data
+                    });
+                    // this.props.history.push("/searchItem");
+                    this.props.history.push({
+                        pathname: '/searchItem',
+                        state: {result: data}
+                    });
+                } else {
+                    this.setState({
+                        message: "Hotel Search: Bad Query"
+                    });
+                }
+            });
+
+    },
+
+    handleSearchFlight() {
+        var to_airport = document.getElementsByClassName("react-autosuggest__input")[0].getAttribute("value");
+        var from_airport = document.getElementsByClassName("react-autosuggest__input")[1].getAttribute("value");
+        var flightFromDate = document.getElementsByClassName("flightFromDate")[0].children[0].children[0].getAttribute("value");
+
+        var JSON_filter = {
+            "filter": {
+                "to_airport": to_airport,
+                "from_airport": from_airport,
+                "departure_date": flightFromDate,
+                "flex_days" : 1
+            }
+        };
+        console.log(JSON_filter);
+
+        API.doFlightSearch(JSON_filter)
+            .then((data) => {
+                if (data.message === "Success") {
+                    //console.log("Response: " + JSON.stringify(data));
+                    this.setState({
+                        result: data
+                    });
+                    // this.props.history.push("/searchItem");
+                    this.props.history.push({
+                        pathname: '/searchFlight',
+                        state: {result: data}
+                    });
+                } else {
+                    this.setState({
+                        message: "Flight Search: Bad Query"
+                    });
+                }
+            });
+
+    },
+
     render: function(){
         var str;
         if(this.state.roomNo === 1 && this.state.guestNumStr===1){
@@ -124,8 +237,7 @@ var Content = React.createClass({
                                         <DateTime inputProps={{
                                             placeholder: new Date().toISOString().split("T")[0],
                                             disabled: false
-                                        }}
-                                                  onChange={this.handleCheckInDate}/>
+                                        }} onChange={this.handleCheckInDate}/>
                                     </div>
                                     <div className="col-md-2 hotelToDate">
                                         <DateTime inputProps={{
@@ -136,37 +248,36 @@ var Content = React.createClass({
 
                                     <div className="col-md-3 hotelFiltersContainer" style={{textAlign:"left"}}>
                                         <input type="text"  value={str} /><span className="caret"  data-toggle="collapse" data-target="#demo"/>
-                                        <div id="demo" className="col-md-9 collapse" onFocus={this.handleCollapse} onfocusout={this.handleCollapseOut} style={{textAlign:"left",backgroundColor:"white",paddingBottom:10,maxWidth: "unset",marginTop: "5px"}}>
-                                                    <span id="HotelFilterbox">
-                                                        <div>
-                                                            <div className="HotelFilterboxTitle">Occupancy</div>
-                                                        </div>
-                                                        <div className="HotelFilterboxRoom">
-                                                            <span className="HotelFilterboxRoomTitle">Rooms</span>
-                                                            <span><button onClick={() => this.handleSubNum("Room")}>-</button></span>
-                                                            <span style={{paddingRight:5,paddingLeft:5}}> {this.state.roomNo} </span>
-                                                            <span><button onClick={() => this.handleAddNum("Room")}>+</button></span>
-                                                        </div>
-                                                         <div className="HotelFilterboxAdults">
-                                                            <span className="HotelFilterboxAdultsTitle">Adults</span>
-                                                            <span><button onClick={() => this.handleSubNum("Adults")}>-</button></span>
-                                                            <span style={{paddingRight:5,paddingLeft:5}}> {this.state.adultsNo} </span>
-                                                            <span><button onClick={() => this.handleAddNum("Adults")}>+</button></span>
-                                                        </div>
-                                                          <div className="HotelFilterboxChildren">
-                                                            <span className="HotelFilterboxChildrenTitle">Children</span>
-                                                           <span><button onClick={() => this.handleSubNum("Children")}> - </button></span>
-                                                              <span style={{paddingRight:5,paddingLeft:5}}> {this.state.childrenNo} </span>
-                                                            <span><button onClick={() => this.handleAddNum("Children")}>+</button></span>
-                                                        </div>
-                                                    </span>
+                                        <div id="demo" className="col-md-9 collapse" onFocus={this.handleCollapse} onBlur={this.handleCollapseOut} style={{textAlign:"left",backgroundColor:"white",paddingBottom:10,maxWidth: "unset",marginTop: "5px",boxShadow:"0 3px 12px 1px rgba(0,0,0,0.26)"}}>
+                                            <span id="HotelFilterbox">
+                                                <div>
+                                                    <div className="HotelFilterboxTitle">Occupancy</div>
+                                                </div>
+                                                <div className="HotelFilterboxRoom">
+                                                    <span className="HotelFilterboxRoomTitle">Rooms</span>
+                                                    <span><button onClick={() => this.handleSubNum("Room")}>-</button></span>
+                                                    <span style={{paddingRight:5,paddingLeft:5}}> {this.state.roomNo} </span>
+                                                    <span><button onClick={() => this.handleAddNum("Room")}>+</button></span>
+                                                </div>
+                                                 <div className="HotelFilterboxAdults">
+                                                    <span className="HotelFilterboxAdultsTitle">Adults</span>
+                                                    <span><button onClick={() => this.handleSubNum("Adults")}>-</button></span>
+                                                    <span style={{paddingRight:5,paddingLeft:5}}> {this.state.adultsNo} </span>
+                                                    <span><button onClick={() => this.handleAddNum("Adults")}>+</button></span>
+                                                </div>
+                                                  <div className="HotelFilterboxChildren">
+                                                    <span className="HotelFilterboxChildrenTitle">Children</span>
+                                                   <span><button onClick={() => this.handleSubNum("Children")}> - </button></span>
+                                                      <span style={{paddingRight:5,paddingLeft:5}}> {this.state.childrenNo} </span>
+                                                    <span><button onClick={() => this.handleAddNum("Children")}>+</button></span>
+                                                </div>
+                                            </span>
                                         </div>
                                     </div>
 
 
                                     <div className={"col-md-1"}>
-                                        <a className="btn btn-lg btn-primary hotelSearchImage" href="../../components/navbar/"
-                                           role="button">--&raquo;</a>
+                                        <a className="btn btn-lg btn-primary hotelSearchImage" role="button" onClick={this.handleSearchHotels}>--&raquo;</a>
                                     </div>
                                 </div>
                             </div>
@@ -210,37 +321,41 @@ var Content = React.createClass({
 
                                     <div className="col-md-3 flightFiltersContainer" style={{textAlign:"left"}}>
                                         <input type="text"  value={str} /><span className="caret"  data-toggle="collapse" data-target="#demo"/>
-                                        <div id="demo" className="col-md-9 collapse" onFocus={this.handleCollapse} onfocusout={this.handleCollapseOut} style={{textAlign:"left",backgroundColor:"white",paddingBottom:10}}>
-                                                    <span id="box">
-                                                    <table>
-                                                        <tr>
-                                                            <th>Occupancy</th>
-                                                        </tr><hr/>
-                                                        <tr>
-                                                            <td>Rooms</td>
-                                                            <td><button onClick={() => this.handleSubNum("Room")}>-</button></td>
-                                                            <td style={{paddingRight:5,paddingLeft:5}}> {this.state.roomNo} </td>
-                                                            <td><button onClick={() => this.handleAddNum("Room")}>+</button></td>
-                                                        </tr><hr/>
-                                                        <tr>
-                                                            <td>Adults</td>
-                                                            <td><button onClick={() => this.handleSubNum("Adults")}>-</button></td>
-                                                            <td style={{paddingRight:5,paddingLeft:5}}> {this.state.adultsNo} </td>
-                                                            <td><button onClick={() => this.handleAddNum("Adults")}>+</button></td>
-                                                        </tr><hr/>
-                                                        <tr>
-                                                            <td>Children</td>
-                                                            <td><button onClick={() => this.handleSubNum("Children")}> - </button></td>
-                                                            <td style={{paddingRight:5,paddingLeft:5}}> {this.state.childrenNo} </td>
-                                                            <td><button onClick={() => this.handleAddNum("Children")}>+</button></td>
-                                                        </tr>
-                                                    </table>
-                                                    </span>
+                                        <div id="demo" className="col-md-9 collapse" onFocus={this.handleCollapse} onBlur={this.handleCollapseOut} style={{textAlign:"left",backgroundColor:"white",paddingBottom:10,maxWidth: "unset",marginTop: "5px", marginLeft:"20px", boxShadow:"0 3px 12px 1px rgba(0,0,0,0.26)", height:"300px" }}>
+                                            <span id="FlightFilterbox">
+                                                <div>
+                                                    <div className="FlightFilterboxTitle">Travelers</div>
+                                                </div>
+                                                <div className="FlightFilterboxRoom">
+                                                    <span className="FlightFilterboxRoomTitle">Adults</span>
+                                                    <span><button onClick={() => this.handleSubNum("Room")}>-</button></span>
+                                                    <span style={{paddingRight:5,paddingLeft:5}}> {this.state.roomNo} </span>
+                                                    <span><button onClick={() => this.handleAddNum("Room")}>+</button></span>
+                                                </div>
+                                                 <div className="FlightFilterboxAdults">
+                                                    <span className="FlightFilterboxAdultsTitle">Seniors</span>
+                                                    <span><button onClick={() => this.handleSubNum("Adults")}>-</button></span>
+                                                    <span style={{paddingRight:5,paddingLeft:5}}> {this.state.adultsNo} </span>
+                                                    <span><button onClick={() => this.handleAddNum("Adults")}>+</button></span>
+                                                </div>
+                                                 <div className="FlightFilterboxChildren">
+                                                    <span className="FlightFilterboxChildrenTitle">Child</span>
+                                                   <span><button onClick={() => this.handleSubNum("Children")}> - </button></span>
+                                                      <span style={{paddingRight:5,paddingLeft:5}}> {this.state.childrenNo} </span>
+                                                    <span><button onClick={() => this.handleAddNum("Children")}>+</button></span>
+                                                </div>
+                                                <div className="FlightFilterboxChildren">
+                                                    <span className="FlightFilterboxChildrenTitle">Infant</span>
+                                                   <span><button onClick={() => this.handleSubNum("Children")}> - </button></span>
+                                                      <span style={{paddingRight:5,paddingLeft:5}}> {this.state.childrenNo} </span>
+                                                    <span><button onClick={() => this.handleAddNum("Children")}>+</button></span>
+                                                </div>
+                                            </span>
                                         </div>
                                     </div>
 
                                     <div className={"col-md-1"}>
-                                        <a className="btn btn-lg btn-primary flightSubmitButton" href="../../components/navbar/"
+                                        <a className="btn btn-lg btn-primary flightSubmitButton"
                                            role="button">--&raquo;</a>
                                     </div>
 
@@ -292,9 +407,12 @@ var Content = React.createClass({
 
                     </div>
                     :null}
+
+
+
             </div>
         );
     }
 });
 
-export default Content;
+export default withRouter(Content);

@@ -8,6 +8,8 @@ import flightIcon from '../images/FIcon.png';
 import carsIcon from '../images/Cars.png';
 import pIcon from '../images/Packages.png';
 import myAccount2 from '../images/MyAccount2.png';
+import footer from '.././images/footer.png'
+import aboveFooter from '.././images/aboveFooter.png'
 
 import AccountPreference from './AccountPreference';
 import Signup from './Signup';
@@ -16,6 +18,8 @@ import AdminPage from './AdminPage';
 import SignIn from './SignIn';
 import AddHotelComponent from './AddHotelComponent';
 import SearchResultPage from './SearchResultPage';
+import SearchCarResultPage from './SearchCarResultPage';
+import SearchFlightResultPage from './SearchFlightResultPage';
 import Tabs from './Tabs';
 import NavTabs from './NavTabs';
 import Content from './Content';
@@ -23,8 +27,7 @@ import Dashboard from './Dashboard.js';
 import * as API from '../api/API';
 import UpdateHotelComponent from './UpdateHotelComponent';
 import AddFlightComponent from './AddFlightComponent';
-
-
+import AddCarComponent from './AddCarComponent';
 
 
 var tabList = [
@@ -40,7 +43,8 @@ var MainTabsContainer = React.createClass({
     getInitialState: function () {
         return {
             tabList: tabList,
-            currentTab: 1
+            currentTab: 1,
+            result: this.props.result
         };
     },
 
@@ -83,6 +87,8 @@ class HomePage extends Component {
         //     });
     };
 
+
+
     state = {
         checkInDate: "",
         checkOutDate: "",
@@ -94,7 +100,8 @@ class HomePage extends Component {
         adultsNo: 0,
         childrenNo : 0,
         roomNumStr: "",
-        guestNumStr: ""
+        guestNumStr: "",
+        result:''
     }
 
     constructor(props) {
@@ -103,12 +110,21 @@ class HomePage extends Component {
         this.hotelToggle = this.hotelToggle.bind(this);
         this.flightToggle = this.flightToggle.bind(this);
         this.carToggle = this.carToggle.bind(this);
+        this.SearchResulthandler = this.SearchResulthandler.bind(this);
 
         this.state = {
             shownHotel: true,
             shownFlight: false,
-            shownCar: false
+            shownCar: false,
+            result: ''
         }
+    }
+
+    SearchResulthandler(param1) {
+        console.log(param1);
+        this.setState({
+            result: param1
+        });
     }
 
     hotelToggle() {
@@ -279,6 +295,7 @@ class HomePage extends Component {
                                         </div>
 
                             </Modal>
+
                         </div>
 
                         <div className="col-md-1">
@@ -328,7 +345,6 @@ class HomePage extends Component {
                         <div className="col-md-1">
 
                         </div>
-
                     </div>
 
 
@@ -344,14 +360,17 @@ class HomePage extends Component {
 
                             </div>
                             <div className="col-md-8">
-                                <MainTabsContainer/>
+                                <MainTabsContainer action={this.SearchResulthandler}/>
                             </div>
                         </div>
                         <div className="row">
                         </div>
 
                     </main>
-
+                       <div className="aboveFooter">
+                           <h1>Use our smart tools to make your search for cheap hotels easier</h1>
+                           <img className="aboveFooterImage" src={aboveFooter} alt={'aboveFooter'}/>
+                       </div>
                 </div>
                 )}/>
                 <Route exact path="/AccountPreference" render={() => (
@@ -370,21 +389,36 @@ class HomePage extends Component {
                     <SignIn/>
                 )}/>
 
-               <Route exact path="/addHotels" render={() => (
-                   <AddHotelComponent/>
-               )}/>
-               <Route exact path="/searchItem" render={() => (
-                   <SearchResultPage searchResult = {this.state.result}/>
-               )}/>
-                 <Route exact path="/updateHotels" render={() => (
+                <Route exact path="/addHotels" render={() => (
+                    <AddHotelComponent/>
+                )}/>
+                <Route exact path="/searchItem" render={() => (
+                    <SearchResultPage searchResult={this.state.result}/>
+                )}/>
+                <Route exact path="/searchCar" render={() => (
+                    <SearchCarResultPage searchResult={this.state.result}/>
+                )}/>
+                <Route exact path="/searchFlight" render={() => (
+                    <SearchFlightResultPage searchResult={this.state.result}/>
+                )}/>
+                <Route exact path="/updateHotels" render={() => (
                     <UpdateHotelComponent/>
                 )}/>
                 <Route exact path="/addFlights" render={() => (
                     <AddFlightComponent/>
                 )}/>
+
                 <Route exact path="/dashboard" render={() => (
                     <Dashboard/>
                 )}/>
+
+                <Route exact path="/addCars" render={() => (
+                    <AddCarComponent/>
+                )}/>
+                <div >
+                    <img className="footer" src={footer} alt={'footer'}/>
+                </div>
+
             </div>
         )
     }

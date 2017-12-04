@@ -4,6 +4,7 @@ import kayak from '../images/KAYAK.png';
 import AddHotelComponent from './AddHotelComponent';
 import UpdateHotelComponent from './UpdateHotelComponent';
 import AddFlightComponent from './AddFlightComponent';
+import AddCarComponent from './AddCarComponent';
 
 class AdminPage extends Component {
     render() {
@@ -42,7 +43,7 @@ class AdminPage extends Component {
                                         <ul className="sub-menu collapse" id="service3">
                                             <li style={{paddingLeft: 20}}><a href="/addHotels">Hotel</a></li>
                                             <li style={{paddingLeft: 20}}><a href="/addFlights">Flight</a></li>
-                                            <li style={{paddingLeft: 20}}>Car</li>
+                                            <li style={{paddingLeft: 20}}><a href="/addCars">Car</a></li>
                                         </ul>
                                         <li>Search</li>
                                         <li data-toggle="collapse" data-target="#service4" className="collapsed">
@@ -50,7 +51,7 @@ class AdminPage extends Component {
                                         </li>
                                         <ul className="sub-menu collapse" id="service4">
                                             <li style={{paddingLeft: 20}}><a href="/updateHotels">Hotel</a></li>
-                                            <li style={{paddingLeft: 20}}>Flight</li>
+                                            <li style={{paddingLeft: 20}}><a href="/updateFlights">Flight</a></li>
                                             <li style={{paddingLeft: 20}}>Car</li>
                                         </ul>
                                     </ul>
@@ -86,6 +87,11 @@ class AdminPage extends Component {
                 <Route exact path="/addFlights" render={() => (
                     <AddFlightComponent/>
                 )}/>
+                <Route exact path="/addCars" render={() => (
+                    <AddCarComponent/>
+                )}/>
+
+
             </div>
         )
     }

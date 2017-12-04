@@ -4,6 +4,7 @@ import Rater from 'react-rater'
 import 'react-rater/lib/react-rater.css'
 import kayak from '../images/KAYAK.png';
 import * as API from '../api/API';
+import MyAutosuggest from "./MyAutoSuggest";
 
 class AddHotelComponent extends Component {
     state = {
@@ -18,40 +19,30 @@ class AddHotelComponent extends Component {
         standardNo: '',
         deluxNo: '',
         premiumNo: '',
+        standardDescription: '',
+        deluxDescription: '',
+        premiumDescription: '',
         hotel_phoneNo: '',
         hotel_email: '',
-        hotel_area: '',
-        hotel_street: '',
         selected_city: ''
     }
 
-    constructor(props) {
+    constructor(props){
         super(props);
-        this.makeAddress = this.makeAddress.bind(this);
+        this.handleSearchHotels= this.handleSearchHotels.bind(this);
     }
 
-    componentDidMount() {
-        API.getCities()
-            .then((res) => {
-                if (res) {
-                    this.setState({
-                        city: res.data
-                    });
-                } else if (res) {
-                     console.log(res);
-                }
-            })
-    }
-
-
-
-    makeAddress() {
+    handleSearchHotels() {
+        console.log("SearchHotel: " + document.getElementsByClassName("react-autosuggest__input")[0].getAttribute("value"));
+        var valueOfCity = document.getElementsByClassName("react-autosuggest__input")[0].getAttribute("value");
         this.setState({
-            hotel_address: this.state.hotel_area + " " + this.state.hotel_street + " " + this.state.city
+            city : valueOfCity
         })
     }
 
     handleAddHotel = () => {
+        this.handleSearchHotels();
+        console.log("this.state.city "+this.state.city)
         API.addHotels(this.state)
             .then((status) => {
                 if (status === 201) {
@@ -176,37 +167,26 @@ class AddHotelComponent extends Component {
                                     </div>
                                     <div className="form-group">
                                         <label className="col-md-4 control-label col-xs-12">Address</label>
-                                        <div className="col-md-2  col-xs-4">
-                                            <input id="Address" name="Address" type="text" placeholder="city"
-                                                   value={this.state.city}
-                                                   onChange={(event) => {
-                                                       this.setState({
-                                                           city: event.target.value
-                                                       });
-                                                   }}
-                                                   className="form-control input-md "/>
-                                        </div>
+
                                         <div className="col-md-2 col-xs-4">
                                             <input id="Address" name="Address" type="text" placeholder="Area"
-                                                   value={this.state.hotel_area}
+                                                   value={this.state.hotel_address}
                                                    onChange={(event) => {
                                                        this.setState({
-                                                           hotel_area: event.target.value
+                                                           hotel_address: event.target.value
                                                        });
                                                    }} className="form-control input-md "/>
+                                        </div>
+                                        <div className="col-md-2  col-xs-4">
+                                            <MyAutosuggest
+                                                id="location"
+                                                placeholder="City"
+                                                onChange={this.onChange}
+                                            />
                                         </div>
                                     </div>
                                     <div className="form-group">
                                         <label className="col-md-4 control-label"/>
-                                        <div className="col-md-2  col-xs-4">
-                                            <input id="Permanent Address" name="Permanent Address" type="text"
-                                                   placeholder="Street" value={this.state.hotel_street}
-                                                   onChange={(event) => {
-                                                       this.setState({
-                                                           hotel_street: event.target.value
-                                                       });
-                                                   }} className="form-control input-md "/>
-                                        </div>
                                         <div className="col-md-2 col-xs-4">
                                             <input id="Address" name="Address" type="text" placeholder="ZipCode"
                                                    value={this.state.zip_code}
@@ -270,6 +250,18 @@ class AddHotelComponent extends Component {
                                                        }} className="form-control input-md"/>
                                             </div>
                                         </div>
+                                        <div className="col-md-2">
+                                            <div className="input-group">
+                                                <input type="text"
+                                                       placeholder="Description"
+                                                       value={this.state.deluxDescription}
+                                                       onChange={(event) => {
+                                                           this.setState({
+                                                               deluxDescription: event.target.value
+                                                           });
+                                                       }} className="form-control input-md"/>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div className="form-group">
                                         <label className="col-md-4 control-label"/>
@@ -284,6 +276,18 @@ class AddHotelComponent extends Component {
                                                        onChange={(event) => {
                                                            this.setState({
                                                                premiumNo: event.target.value
+                                                           });
+                                                       }} className="form-control input-md"/>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-2">
+                                            <div className="input-group">
+                                                <input type="text"
+                                                       placeholder="Description"
+                                                       value={this.state.premiumDescription}
+                                                       onChange={(event) => {
+                                                           this.setState({
+                                                               premiumDescription: event.target.value
                                                            });
                                                        }} className="form-control input-md"/>
                                             </div>
@@ -306,6 +310,18 @@ class AddHotelComponent extends Component {
                                                        }} className="form-control input-md"/>
                                             </div>
                                         </div>
+                                        <div className="col-md-2">
+                                            <div className="input-group">
+                                                <input  type="text"
+                                                       placeholder="Description"
+                                                       value={this.state.standardDescription}
+                                                       onChange={(event) => {
+                                                           this.setState({
+                                                               standardDescription: event.target.value
+                                                           });
+                                                       }} className="form-control input-md"/>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div className="form-group">
@@ -320,27 +336,6 @@ class AddHotelComponent extends Component {
                                                    }}/>
                                         </div>
                                     </div>
-
-
-                                    <div className="dropdown">
-                                        <button className="dropbtn">Dropdown</button>
-                                        <div className="dropdown-content">
-                                            {this.state.city.map((task, i) =>
-                                                <div className="RecentItem" key={i}>
-                                                    <a href="#" value ={task.city_name} onClick = {(event) => {
-                                                        this.setState({
-                                                            selected_city: task.city_name
-                                                        });
-                                                    }}>{task.city_name}</a>
-                                                </div>
-                                            )}
-                                            {console.log("this.state.selected_city"+this.state.selected_city)}
-                                            </div>
-                                    </div>
-
-
-
-
 
                                     <div className="form-group">
                                         <label className="col-md-4 control-label"/>
