@@ -5,6 +5,12 @@ import stars5 from '.././images/5stars.png'
 import stars4 from '.././images/4stars.png'
 import stars3 from '.././images/3stars.png'
 import stars2 from '.././images/2stars.png'
+import hotel1 from '.././images/hotel1.jpg'
+import hotel2 from '.././images/hotel2.jpg'
+import hotel3 from '.././images/hotel3.jpg'
+import hotel4 from '.././images/hotel4.jpg'
+import hotel5 from '.././images/hotel5.jpg'
+
 import footer from '.././images/footer.png'
 import rightpaneimage1 from '.././images/rightPaneImage1.png'
 import rightpaneimage2 from '.././images/rightPaneImage2.png'
@@ -20,7 +26,6 @@ class SearchResultPage extends React.Component {
         };
         this.bookItem= this.bookItem.bind(this);
     }
-
 
     bookItem(task){
         console.log("task strigified "+JSON.stringify(task));
@@ -52,10 +57,11 @@ class SearchResultPage extends React.Component {
 
     }
 
+
     componentDidMount() {
         API.getHotelSearchResults()
             .then((data) => {
-                console.log(data.data[0]);
+                console.log(JSON.stringify(data.data[0]));
                 this.setState({
                     searchResults: data.data
                 });
@@ -63,6 +69,7 @@ class SearchResultPage extends React.Component {
     };
 
     render() {
+        let  str= "";
         return (
             <div className="container-fluid searchListPage" style={{backgroundColor:"#e4e5ea", paddingBottom:"25px"}}>
                 <nav className="navbar navbar-inverse">
@@ -147,7 +154,47 @@ class SearchResultPage extends React.Component {
                         {this.state.searchResults.map((task, i) =>
                             <div className="SearchListItemMainContainer">
                                 <span className="SearchListItemImage">
-                                    <img src={task.hotel_image}/>
+                                    {
+                                        i % 10 == 1 ?(
+                                            <img className="hotelImage" src={"http://localhost:3000/images/hotel1.jpg"} alt={'hotel'}/>
+                                        ) :(
+                                            i % 10 == 2 ?(
+                                                <img className="hotelImage" src={"http://localhost:3000/images/hotel2.jpg"} alt={'hotel'}/>
+                                            ) :(
+                                                i % 10 == 3 ?(
+                                                    <img className="hotelImage" src={"http://localhost:3000/images/hotel3.jpg"} alt={'hotel'}/>
+                                                ) :(
+                                                    i % 10 == 4 ?(
+                                                        <img className="hotelImage" src={"http://localhost:3000/images/hotel4.jpg"} alt={'hotel'}/>
+                                                    ) :(
+                                                        i % 10 == 5 ?(
+                                                            <img className="hotelImage" src={"http://localhost:3000/images/hotel5.jpg"} alt={'hotel'}/>
+                                                        ) :(
+                                                            i % 10 == 6 ?(
+                                                                <img className="hotelImage" src={"http://localhost:3000/images/hotel6.jpg"} alt={'hotel'}/>
+                                                            ) :(
+                                                                i % 10 == 7 ?(
+                                                                    <img className="hotelImage" src={"http://localhost:3000/images/hotel7.jpg"} alt={'hotel'}/>
+                                                                ) :(
+                                                                    i % 10 == 8 ?(
+                                                                        <img className="hotelImage" src={"http://localhost:3000/images/hotel8.jpg"} alt={'hotel'}/>
+                                                                    ) :(
+                                                                        i % 10 == 9 ?(
+                                                                            <img className="hotelImage" src={"http://localhost:3000/images/hotel9.jpg"} alt={'hotel'}/>
+                                                                        ) :(
+                                                                            <img className="hotelImage" src={"http://localhost:3000/images/hotel0.jpg"} alt={'hotel'}/>
+                                                                        )
+                                                                    )
+                                                                )
+                                                            )
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                        )
+
+                                    }
+
                                 </span>
                                 <span className="SearchListItemMainContent">
                                     <div className="SearchListItemTitle">{task.hotel_name}</div>
