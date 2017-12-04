@@ -1,12 +1,47 @@
-//const api = process.env.REACT_APP_CONTACTS_API_URL || 'http://10.0.0.106:3001';
 const api = process.env.REACT_APP_CONTACTS_API_URL || 'http://localhost:3001';
 
 const headers = {
     'Accept': 'application/json'
 };
 
+export const loginAPI = (payload) =>
+    fetch(`${api}/hotels/userLogin`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body: JSON.stringify(payload)
+    }).then(res => {
+        console.log(res);
+        return res.status;
+    })
+        .catch(error => {
+            console.log("This is error"+error);
+            return error;
+        });
+
+export const getBookingDetails = (payload) =>
+    fetch(`${api}/getBookingDetails`, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body: JSON.stringify(payload)
+    }).then(res => {
+        console.log(res);
+        return res.json();
+    })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+
 export const doLogin = (payload) =>
-    fetch(`${api}/login`, {
+    fetch(`${api}/hotels/userLogin`, {
         method: 'POST',
         headers: {
             ...headers,
@@ -435,4 +470,38 @@ return res.status;
 return error;
 });
 
+export const get_car_details = (payload) =>
+    fetch(`${api}/get_car_details`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body: JSON.stringify(payload)
+    }).then(res => {
+        console.log(res);
+        return res.json();
+    })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
 
+export const updateCars = (payload) =>
+    fetch(`${api}/updateCars`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body: JSON.stringify(payload)
+    }).then(res => {
+        console.log(res);
+        return res.json();
+    })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });

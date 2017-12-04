@@ -33,6 +33,10 @@ import UpdateAccount from './UpdateAccount';
 import SearchCarResultPage from './SearchCarResultPage';
 import SearchFlightResultPage from './SearchFlightResultPage';
 import Dashboard from './Dashboard.js';
+import BookingPage from './BookingPage.js';
+import MakeBooking from './MakeBooking.js';
+import BookingDetails from './BookingDetails.js';
+
 
 var tabList = [
     {'id': 1, 'name': 'HOTELS', 'url': '/hotel'},
@@ -204,7 +208,7 @@ class HomePage extends Component {
 
     handleSubmit = (userdata) => {
         console.log("Inside HandleSubmit ", userdata);
-        API.doLogin(userdata)
+        API.loginAPI(userdata)
             .then((status) => {
                 if (status === 201) {
                     this.setState({
@@ -481,6 +485,20 @@ class HomePage extends Component {
                 <Route exact path="/dashboard" render={() => (
                     <Dashboard/>
                 )}/>
+
+                {/*Render page to select room*/}
+                <Route exact path="/bookItem" render={() => (
+                    <BookingPage />
+                )}/>
+                <Route exact path="/bookingDetails" render={() => (
+                    <BookingDetails />
+                )}/>
+
+                {/*After selecting room confirm booking with payment*/}
+                <Route exact path="/makeBooking" render={() => (
+                    <MakeBooking />
+                )}/>
+
                 <div>
                     <img className="footer" src={footer} alt={'footer'}/>
                 </div>

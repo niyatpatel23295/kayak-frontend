@@ -43,14 +43,14 @@ class Payment extends Component{
                     <div className="row">
                         <div className="col-xs-12 col-md-4 col-md-offset-4">
                             <br/><br/>
-                            <div className="panel panel-default">
-                                <div className="panel-heading">
+                            <div className="">
+                                <div className="">
                                     <div className="row">
                                         <h3 className="text-center">Payment Details</h3>
                                         <img className="img-responsive cc-img" src="http://www.prepbootstrap.com/Content/images/shared/misc/creditcardicons.png" style={{height:80}}/>
                                     </div>
                                 </div>
-                                <div className="panel-body">
+                                <div className="">
                                     <form role="form">
                                         <div className="row">
                                             <div className="col-xs-12">
@@ -108,10 +108,12 @@ class Payment extends Component{
                                         </div>
                                     </form>
                                 </div>
-                                <div className="panel-footer">
+                                <div className="">
                                     <div className="row">
                                         <div className="col-xs-12">
                                             <button className="btn btn-warning btn-lg btn-block" onClick={() => this.handleSubmitPaymentDetails(this.state)}>Process payment</button>
+                                            <br />
+                                            <br />
                                         </div>
                                     </div>
                                 </div>

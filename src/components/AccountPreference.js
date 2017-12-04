@@ -4,6 +4,7 @@ import MyAccount2 from '../images/MyAccount2.png';
 import Signup from './Signup';
 import UpdateAccount from './UpdateAccount'
 import Payment from './Payment';
+import BookingDetails from './BookingDetails.js';
 
 class AccountPreference extends Component {
     state = {
@@ -31,7 +32,9 @@ class AccountPreference extends Component {
                             <br/>
                             <a href='#'><h3>Your Personal Info</h3></a><br/><br/>
                             <a href='/Payment'><h3>Payments</h3></a><br/><br/>
-                            <a href="/UpdateAccount"><h3>Update Info</h3></a>
+                            <a href="/UpdateAccount"><h3>Update Info</h3></a><br/>
+                            <a href="/bookingDetails"><h3>Booking Details</h3></a>
+
                         </div>
                         <div className='col-md-10'>
                             <div className='col-md-8' style={{textAlign: 'Left', paddingTop: 25}}>
@@ -75,6 +78,9 @@ class AccountPreference extends Component {
                 )}/>
                 <Route exact path="/Payment" render={() => (
                     <Payment/>
+                )}/>
+                <Route exact path="/bookingDetails" render={() => (
+                    <BookingDetails />
                 )}/>
 
             </div>
