@@ -19,6 +19,7 @@ import SearchResultPage from './SearchResultPage';
 import Tabs from './Tabs';
 import NavTabs from './NavTabs';
 import Content from './Content';
+import Dashboard from './Dashboard.js';
 import * as API from '../api/API';
 import UpdateHotelComponent from './UpdateHotelComponent';
 import AddFlightComponent from './AddFlightComponent';
@@ -381,7 +382,9 @@ class HomePage extends Component {
                 <Route exact path="/addFlights" render={() => (
                     <AddFlightComponent/>
                 )}/>
-                
+                <Route exact path="/dashboard" render={() => (
+                    <Dashboard/>
+                )}/>
             </div>
         )
     }
