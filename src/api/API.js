@@ -1,11 +1,12 @@
-const api = process.env.REACT_APP_CONTACTS_API_URL || 'http://localhost:3001';
+const api = process.env.REACT_APP_CONTACTS_API_URL || 'http://192.168.122.1:3001';
+//const api = process.env.REACT_APP_CONTACTS_API_URL || 'http://localhost:3001';
 
 const headers = {
     'Accept': 'application/json'
 };
 
 export const loginAPI = (payload) =>
-    fetch(`${api}/hotels/userLogin`, {
+    fetch(`${api}/userLogin`, {
         method: 'POST',
         headers: {
             ...headers,
@@ -505,3 +506,5 @@ export const updateCars = (payload) =>
             console.log("This is error");
             return error;
         });
+
+
