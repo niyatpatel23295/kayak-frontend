@@ -9168,6 +9168,8 @@ input[aria-owns="react-autowhatever-flightToLocation"] {
     margin-left: 20px;
     width: 290px;
     border: none;
+    font-size: large;
+    font-weight: 900;
 }
 
 
