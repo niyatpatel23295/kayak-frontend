@@ -31,6 +31,17 @@ class SearchResultPage extends React.Component {
         console.log("task strigified "+JSON.stringify(task));
         console.log("task json "+task);
         //create json
+        
+          var to_date = "to_date";
+        var to_date_value = this.state.searchResults.to_date;
+        var from_date = "from_date";
+        var from_date_value = this.state.searchResults.from_date;
+
+        task[to_date] = to_date_value;
+        task[from_date] = from_date_value;
+
+        console.log("task.to_date "+this.state.searchResults.to_date);
+        console.log("task.from_date "+task.from_date);
 
         var JSON_filter = {
             "filter": task
