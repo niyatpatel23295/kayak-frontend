@@ -33,7 +33,7 @@ class MakeBooking extends React.Component {
     handleSubmitPaymentDetails = (userdata) => {
         API.SubmitPaymentDetails(userdata)
             .then((status) => {
-                if (status === 201) {
+                if (status === 200) {
                     this.setState({
                         message: "Details submitted successfully..!!"
                     });
@@ -256,6 +256,7 @@ class MakeBooking extends React.Component {
 
                     </div>
                 </div>
+
             </div>
         )
     }

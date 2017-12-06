@@ -211,37 +211,70 @@ var Content = React.createClass({
     },
 
     handleSearchCar() {
+
         var valueOfCity = document.getElementsByClassName("react-autosuggest__input")[0].getAttribute("value");
+
         var valueOfFromDate = document.getElementsByClassName("carFromDate")[0].children[0].children[0].getAttribute("value");
+
         var valueOfToDate = document.getElementsByClassName("carToDate")[0].children[0].children[0].getAttribute("value");
 
+
+
         var JSON_filter = {
+
             "filter": {
+
                 "city_name": valueOfCity,
+
                 "from_date" : valueOfFromDate,
+
                 "to_date" : valueOfToDate
+
             }
+
         };
+
         console.log(JSON_filter);
 
-        API.doHotelSearch(JSON_filter)
+
+
+        API.doCarSearch(JSON_filter)
+
             .then((data) => {
+
                 if (data.message === "Success") {
+
                     //console.log("Response: " + JSON.stringify(data));
+
                     this.setState({
+
                         result: data
+
                     });
+
                     // this.props.history.push("/searchItem");
+
                     this.props.history.push({
-                        pathname: '/searchItem',
+
+                        pathname: '/searchCar',
+
                         state: {result: data}
+
                     });
+
                 } else {
+
                     this.setState({
+
                         message: "Hotel Search: Bad Query"
+
                     });
+
                 }
+
             });
+
+
 
     },
 
@@ -252,12 +285,13 @@ var Content = React.createClass({
 
         var JSON_filter = {
             "filter": {
-                "to_airport": to_airport,
-                "from_airport": from_airport,
-                "departure_date": flightFromDate,
-                "flex_days" : 1
+                "to_airport": "Ahmedabad International Airport (AMD)",
+                "from_airport": "San Jose International Airport (SJC)",
+                "departure_date": "2017-12-28",
+                "flex_days": 1
             }
-        };
+        }
+
         console.log(JSON_filter);
 
         API.doFlightSearch(JSON_filter)
@@ -473,8 +507,9 @@ var Content = React.createClass({
                                     </div>
 
                                     <div className={"col-md-1"}>
-                                        <a className="btn btn-lg btn-primary carSubmitButton" href="../../components/navbar/"
-                                           role="button">--&raquo;</a>
+                                        <a className="btn btn-lg btn-primary carSubmitButton" role="button" onClick={this.handleSearchCar}>--&raquo;</a>
+
+
                                     </div>
                                 </div>
                             </div>

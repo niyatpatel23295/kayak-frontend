@@ -8,7 +8,7 @@ class LoggedInModal extends React.Component {
 
         let modalStyle = {
             position: 'absolute',
-            top: '12%',
+            top: '20%',
             left: '90%',
             transform: 'translate(-50%, -50%)',
             zIndex: '9999',

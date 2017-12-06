@@ -208,7 +208,7 @@ class Signup extends Component{
                                 <div className="form-group">
                                     <label className="col-md-4 control-label" />
                                     <div className="col-md-4">
-                                        <a href="#" className="btn btn-success"><span className="glyphicon glyphicon-thumbs-up"/> Submit</a>
+                                        <a href="#" className="btn btn-success"><span onClick={this.handleSubmit(this.state)} className="glyphicon glyphicon-thumbs-up"/> Submit</a>
 
 
                                     </div>

@@ -110,7 +110,7 @@ class HomePage extends Component {
         guestNumStr: "",
         result: '',
         isLoggedInText: "SignIn",
-        isLoggedIn: false
+        isLoggedIn: ''
     }
 
     constructor(props) {
@@ -174,7 +174,8 @@ class HomePage extends Component {
             childrenNo: 0,
             roomNumStr: "",
             guestNumStr: "",
-            isLoggedInText: "SignIn"
+            isLoggedInText: "SignIn",
+            isLoggedIn: ''
         }
     }
 
@@ -216,19 +217,11 @@ class HomePage extends Component {
                         email: userdata.email
                     });
                     this.closeModal();
-                    this.closeLoggedInModal();
-                    //this.closeLoggedOutModal();
-                    //this.props.history.push("/");
+                    this.props.history.push("/");
                 } else if (status === 401) {
                     this.setState({
                         isLoggedIn: false,
                         message: "Wrong username or password. Try again..!!"
-                    });
-                }
-                else if (status === 402) {
-                    this.setState({
-                        isLoggedIn: false,
-                        message: "User not registered"
                     });
                 }
             });
@@ -344,10 +337,9 @@ class HomePage extends Component {
                                 </Modal>
                                 <LoggedInModal isOpen={this.state.isLoggededInModalOpen}
                                                onClose={() => this.closeLoggedInModal()}>
-
                                     <div className="modal-body1">
                                         <div>
-                                            <h6>UserName ={this.state.email}</h6>
+                                           <h6>UserName ={this.state.email}</h6>
                                         </div>
                                         <hr/>
                                         <div>
@@ -363,45 +355,20 @@ class HomePage extends Component {
                                         </div>
                                     </div>
                                 </LoggedInModal>
-
                                 <LoggedOutMOdal isOpen={this.state.isLoggedOutModalOpen}
-                                                onClose={() => this.closeLoggedOutModal()}>
+                                               onClose={() => this.closeLoggedOutModal()}>
                                     <div className="modal-body1">
-                                        {
-                                            this.state.isLoggedIn ? (
-                                                <div>
-                                                    <div>
-                                                        <h6 style={{fontWeight:"700",color:"#337ab7"}}>User: {this.state.email}</h6>
-                                                    </div>
-                                                    <hr/>
-                                                    <div>
-                                                        <a href="/AccountPreference"><b>Account Preference</b></a>
-                                                    </div>
-                                                    <hr/>
-                                                    <div>
-                                                        <a href="#"><b>Trips</b></a>
-                                                    </div>
-                                                    <hr/>
-                                                    <div>
-                                                        <a href="/" onClick={this.sessionLogout()}><b>Sign Out</b></a>
-                                                    </div>
-                                                </div>
-                                            ) : (
-                                                <div>
-                                                    <div>
-                                                        <a href="#"
-                                                           onClick={() => this.openModal()}>
-                                                            <b>Sign In</b></a>
-                                                    </div>
-                                                    <hr/>
-                                                    <div>
-                                                        <a href="/Signup"
-                                                           onClick={() => this.openModal()}>
-                                                            <b>Sign Up</b></a>
-                                                    </div>
-                                                </div>
-                                            )
-                                        }
+                                        <div>
+                                            <a href="#"
+                                               onClick={() => this.openModal()}>
+                                                <b>Sign In</b></a>
+                                        </div>
+                                        <hr/>
+                                        <div>
+                                            <a href="/Signup"
+                                               onClick={() => this.openModal()}>
+                                                <b>Sign Up</b></a>
+                                        </div>
                                     </div>
                                 </LoggedOutMOdal>
 
@@ -423,9 +390,8 @@ class HomePage extends Component {
                                         <form className="form-inline mt-12 mt-md-0">
 
                                             <a className="customAccount"
-                                               onClick={() =>  this.openLoggedOutModal()}>
-                                                <b style={{color: "white"}}><img src={myAccount2} width={30}
-                                                                                 style={{paddingBottom: 5}}/>My Account</b></a>
+                                               onClick={() => this.state.isLoggedIn == "true" ? this.openLoggedInModal() : this.openLoggedOutModal()}>
+                                                <b style={{color:"white"}}><img src={myAccount2} width={30} style={{paddingBottom: 5}}/>My Account</b></a>
                                         </form>
                                     </div>
                                 </div>
@@ -522,15 +488,17 @@ class HomePage extends Component {
 
                 {/*Render page to select room*/}
                 <Route exact path="/bookItem" render={() => (
-                    <BookingPage/>
+                    <BookingPage />
                 )}/>
                 <Route exact path="/bookingDetails" render={() => (
-                    <BookingDetails/>
+                    <BookingDetails />
                 )}/>
+
+
 
                 {/*After selecting room confirm booking with payment*/}
                 <Route exact path="/makeBooking" render={() => (
-                    <MakeBooking/>
+                    <MakeBooking />
                 )}/>
 
                 <div>

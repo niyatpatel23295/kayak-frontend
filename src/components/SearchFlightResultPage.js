@@ -52,28 +52,25 @@ class SearchFlightResultPage extends React.Component {
                         <div className="nav-side-menu col-md-8" style={{textAlign: 'Center', top:'4px', backgroundColor:'white', marginLeft:'100px', height:'500px'}}>
                             <br/><br/>
                             <button type="button" className="btn btn-info carfilterbuttons" data-toggle="collapse" data-target="#demo">
-                                <h3>Select car type</h3>
+                                <h3>Select class</h3>
                             </button>
                             <br/><br/>
                             <div id="demo" className="collapse">
                                 <ul className="list-group">
-                                    <li className="">SUV</li>
-                                    <li className="">Large</li>
-                                    <li className="">Medium</li>
-                                    <li className="">Small</li>
-                                    <li className="">Luxury</li>
+                                    <li className="">Economy</li>
+                                    <li className="">Business</li>
                                 </ul>
                             </div>
                             <br/><br/>
                             <button type="button" className="btn btn-info carfilterbuttons" data-toggle="collapse" data-target="#demo1">
-                                <h3>Select passengers</h3>
+                                <h3>Select airlines</h3>
                             </button>
                             <br/><br/>
                             <div id="demo1" className="collapse">
                                 <ul className="list-group">
-                                    <li className="">1 to 2 passengers</li>
-                                    <li className="">3 to 5 passengers</li>
-                                    <li className="">6 or more</li>
+                                    <li className="">Air India</li>
+                                    <li className="">Emirates</li>
+                                    <li className="">Southwest</li>
                                 </ul>
                             </div>
                             <br/><br/>

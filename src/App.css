@@ -9048,7 +9048,7 @@ span.NavTabSection {
 {
     background-image: url("./images/background.jpg");
     height: 990px;
-}
+   }
 
 .kayaklogo{
     background-image: url("./images/KAYAK.png");
@@ -9168,6 +9168,8 @@ input[aria-owns="react-autowhatever-flightToLocation"] {
     margin-left: 20px;
     width: 290px;
     border: none;
+    font-size: large;
+    font-weight: 900;
 }
 
 
@@ -9819,65 +9821,10 @@ span.SearchListItemFlightConnImage {
     margin-left: -60px;
 }
 
-
-/******/
-span.SearchListItemCarMainContent {
-    width: 30%;
-    display: inline-block;
-    margin-left: 110px;
-}
-span.SearchListItemCarImage {
-    width: 30%;
-    display: inline-block;
-    float: left;
-}
-
-img.carImage {
-    margin: 30px 0px 0 10px;
-}
-
-
-.SearchListItemPass {
-    font-size: 15px;
-    margin-bottom: 15px;
-    margin-left: 60px;
-}
-
-.SearchListItemBag {
-    font-size: 15px;
-    margin-bottom: 15px;
-    margin-left: 60px;
-}
-
-.SearchListItemDoor {
-    font-size: 15px;
-    margin-left: 60px;
-}
-
-
-img.passengerIcon {
-    height: 30px;
-    width: 30px;
-    margin-right: 10px;
-}
-
-img.largeBagIcon {
-    height: 30px;
-    width: 30px;
-    margin-right: 10px;
-}
-
-img.doorIcon {
-    height: 30px;
-    width: 30px;
-    margin-right: 10px;
-}
-
-
 a.customAccount {
-    margin-left: 917px;
-    font-size: 16px;
-    margin-top: 6px;
+    margin-left: 923px;
+    font-size: medium;
+    margin-top: 10px;
 }
 
 .ModalLoggedOutDiv {

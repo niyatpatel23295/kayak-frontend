@@ -1,5 +1,4 @@
-const api = process.env.REACT_APP_CONTACTS_API_URL || 'http://192.168.122.1:3001';
-//const api = process.env.REACT_APP_CONTACTS_API_URL || 'http://localhost:3001';
+const api = process.env.REACT_APP_CONTACTS_API_URL || 'http://localhost:3001';
 
 const headers = {
     'Accept': 'application/json'
@@ -339,7 +338,7 @@ export const doFlightSearch = (payload) =>
         credentials:'include',
         body: JSON.stringify(payload)
     }).then(res => {
-        console.log("hotels/search_hotels: "+res);
+        console.log("flights/search_flights: "+res);
         return res.json();
     })
         .catch(error => {
@@ -506,5 +505,3 @@ export const updateCars = (payload) =>
             console.log("This is error");
             return error;
         });
-
-

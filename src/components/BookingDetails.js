@@ -17,33 +17,21 @@ import * as API from '../api/API';
 class BookingDetails extends Component {
 
     state = {
-
-        userId: 'U1090',
-
-        userName: 'Xyz',
-
+        userId: '',
         hotel_Name: '',
-
         price: '',
-
         roomType: '',
-
         roomNo: '',
-
         roomDesc: '',
-
         checkInDate: '',
-
         checkOutDate: '',
-
-        bookingType: ''
-
+        hotelAddress: '',
+        bookingType: '',
+        cardNO: '',
+        cardType: ''
     }
 
-
-
     componentDidMount() {
-
         API.getBookingDetails()
 
             .then((data) => {
@@ -52,33 +40,26 @@ class BookingDetails extends Component {
 
                 this.setState({
 
-                    userId: data.data.userId ,
-
-                    userName: data.data.userName,
-
-                    hotel_Name: data.data.hotel_Name,
-
-                    price: data.data.price,
-
-                    roomType: data.data.roomType,
-
-                    roomNo: data.data.roomNo,
-
-                    roomDesc: data.data.roomDesc,
-
-                    checkInDate: data.data.checkInDate,
-
-                    checkOutDate: data.data.checkOutDate,
-
-                    bookingType: data.data.bookingType
-
+                    userId: data.data.userId,
+                    hotel_Name: data.data.bookingDetails.hotelName,
+                    price: data.data.bookingDetails.price,
+                    roomType: data.data.bookingDetails.roomType,
+                    roomNo: data.data.bookingDetails.roomNo,
+                    roomDesc: data.data.bookingDetails.roomDesc,
+                    hotelAddress: data.data.bookingDetails.hotelAddress,
+                    checkInDate: data.data.bookingDetails.checkInDate,
+                    checkOutDate: data.data.bookingDetails.checkOutDate,
+                    bookingType: data.data.bookingType,
+                    cardNO: data.data.paymentDetails.cardNo,
+                    cardType: data.data.paymentDetails.cardType
 
 
                 });
 
             });
 
-    };
+    }
+    ;
 
 
 
@@ -134,15 +115,15 @@ class BookingDetails extends Component {
 
                                 <br/><br/>
 
-                                <label className='col-md-5' style={{fontSize: 15}}>User Name : </label>
-
-                                <text className='col-md-7' style={{fontSize: 15}}>{this.state.userName}</text>
-
-                                <br/><br/>
-
                                 <label className='col-md-5' style={{fontSize: 15}}>Hotel Name : </label>
 
                                 <text className='col-md-7' style={{fontSize: 15}}>{this.state.hotel_Name}</text>
+
+                                <br/><br/>
+
+                                <label className='col-md-5' style={{fontSize: 15}}>Hotel Address : </label>
+
+                                <text className='col-md-7' style={{fontSize: 15}}>{this.state.hotelAddress}</text>
 
                                 <br/><br/>
 
@@ -187,8 +168,36 @@ class BookingDetails extends Component {
                                 <text className='col-md-7' style={{fontSize: 15}}>{this.state.bookingType}</text>
 
                                 <br/><br/>
+                                <label className='col-md-5' style={{fontSize: 15}}>Card No : </label>
 
+                                <text className='col-md-7' style={{fontSize: 15}}>{this.state.cardNO}</text>
 
+                                <br/><br/>
+                                <label className='col-md-5' style={{fontSize: 15}}>Card Type : </label>
+
+                                <text className='col-md-7' style={{fontSize: 15}}>{this.state.cardType}</text>
+
+                                <br/><br/>
+                                <label className='col-md-5' style={{fontSize: 15}}>Flight Details : </label>
+
+                                <label className='col-md-5' style={{fontSize: 15}}>Flight From : </label>
+
+                                <text className='col-md-7' style={{fontSize: 15}}>New York</text>
+
+                                <br/><br/>
+                                <label className='col-md-5' style={{fontSize: 15}}>To City : </label>
+
+                                <text className='col-md-7' style={{fontSize: 15}}>San Jose</text>
+
+                                <br/><br/>
+                                <label className='col-md-5' style={{fontSize: 15}}>Date </label>
+
+                                <text className='col-md-7' style={{fontSize: 15}}>04/12/2017</text>
+
+                                <br/><br/>
+                                <div>
+
+                                </div>
 
                             </div>
 
